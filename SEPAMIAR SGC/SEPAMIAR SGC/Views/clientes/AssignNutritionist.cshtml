@@ -1,0 +1,72 @@
+﻿@model SEPAMIAR_SGC.Models.clientes
+
+@{
+	ViewBag.Title = "Asignar Nutricionista";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="card" style="max-height: 500px; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Editar Cliente</u></h3>
+
+		@using (Html.BeginForm("AssignNutritionist", "Clientes", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="row negative">
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+				<div class="col-12 mar-bot-15 bg-title">
+					Asignación de Nutricionista a cliente
+				</div>
+				@Html.HiddenFor(model => model.id_alt)
+				@Html.HiddenFor(model => model.codigo)
+				@Html.HiddenFor(model => model.created_at)
+
+				<div class="col-5 mar-bot-15">
+					@Html.DropDownList("nutricionista_asignado", ViewBag.NutritionistsLst as SelectList, new { @class = "form-control search mar-0" })
+					@Html.ValidationMessageFor(model => model.nutricionista_asignado, "", new { @class = "text-danger" })
+				</div>
+
+				<div class="mar-bot-15 col-5">
+					<div id="jsonTable" class="jsonTable"></div>
+				</div>
+			</div>
+			
+			
+
+			<div class="text-center mar-bot-15">
+				<button type="submit" class="btn btn-default">Guardar Cambios</button>
+			</div>
+		}
+	</div>
+</div>
+
+@section scripts
+{
+	<script src="@Url.Content("~/Scripts/JsonToHtmlTable.js")"></script>
+	<script>
+		$(document).ready(function () {
+			$.getJSON(
+					 '/Nutricionistas/GetScheduledDates',
+					 { id: $("#nutricionista_asignado").val() }
+					).done(function (json) {
+						var jsonHtmlTable = ConvertJsonToTable(json, "autoTable", "pure-table", null);
+						$("#jsonTable").append(jsonHtmlTable);
+					}).fail(function (jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log("Request Failed: " + err);
+					});
+
+			console.log("Prueba");
+
+			$("#nutricionista_asignado").change(function () {
+				console.log("Prueba");
+			})
+
+			
+		});
+	</script>
+}

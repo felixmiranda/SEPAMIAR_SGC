@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.CardioInfo>
+
+@{
+	ViewBag.Title = "Resultados Cardio";
+	Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "cardio_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<<div class="container">
+	<div class="card">
+
+		@Html.ActionLink("Registrar Resultados", "Create", new { @clientId = ViewBag.clientId }, new { @class = "btn btn-default btn-small pull-right", style = ViewBag.DisplayNone })
+		@Html.Hidden("clientId", (int)ViewBag.clientId)
+
+		<h3 class="title mar-bot-30"><u>Resultados de cardiología - @ViewBag.clientName</u></h3>
+
+		<table class="table">
+			<tr>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.fecha)
+				</th>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.cardiologia_aprobacion)
+				</th>
+				<th width="25%" class="text-left">
+					@Html.DisplayNameFor(model => model.presion_arterial_diastolica)
+				</th>
+				<th width="25%" class="text-left">
+					@Html.DisplayNameFor(model => model.presion_arterial_sistolica)
+				</th>
+				<th width="10%">Acciones</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					@{
+						ViewBag.date = item.fecha.ToShortDateString();
+					}
+
+					<td>
+						<p class="mar-0">@ViewBag.date</p>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.cardiologia_aprobacion)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.presion_arterial_diastolica)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.presion_arterial_sistolica)
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "cardio_update":
+									<a href="@Url.Action("Edit", "CardioInfo", new { id = item.id, clientId = ViewBag.clientId })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "cardio_details":
+									<a href="@Url.Action("Details", "CardioInfo", new { id = item.id, clientId = ViewBag.clientId  })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

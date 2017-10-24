@@ -1,0 +1,75 @@
+﻿@model SEPAMIAR_SGC.Models.LabResults
+
+@{
+	ViewBag.Title = "Crear";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="card" style="max-height: 75vh; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Registrar Resultado de Laboratorio</u></h3>
+
+		<div>
+			@using (Html.BeginForm("Create", "LaboratorioResultados", new { @clientId = (int)ViewBag.clientId }, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
+
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(m => m.hemoglobina)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.hemoglobina, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(m => m.colesterol)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.colesterol, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(m => m.creatinina)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.creatinina, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(m => m.glucosa_basal)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.glucosa_basal, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(m => m.trigliceridos)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.trigliceridos, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+				<div class="row mar-bot-20">
+					<div class="col-3">
+						@Html.LabelFor(m => m.fecha)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.fecha, new { htmlAttributes = new { @class = "form-control search mar-0 datepicker" } })
+					</div>
+				</div>
+				<div class="text-center">
+					<input type="submit" value="Crear" class="btn btn-default" style="z-index:0;" />
+				</div>
+			}
+		</div>
+	</div>
+</div>

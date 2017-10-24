@@ -1,0 +1,111 @@
+﻿@model SEPAMIAR_SGC.Models.usuarios
+
+@{
+	ViewBag.Title = "Crear";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	SEPAMIAR_SGC.Models._SGCModel db = new SEPAMIAR_SGC.Models._SGCModel();
+	ViewBag.userCode = (db.usuarios.Count() + 1).ToString("00000#");
+}
+
+<div class="container">
+	<div class="card" style="max-height: 500px; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Registrar Usuario</u></h3>
+
+		@using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { @id = "form-usuarios", @enctype = "multipart/form-data" }))
+		{
+			@Html.AntiForgeryToken()
+
+			<div>
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.codigo)
+					</div>
+					<div class="col-6">
+						<input type="text" name="codigo" value="@ViewBag.userCode" class="form-control search mar-0" readonly="readonly" />
+						@Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.nombres)
+					</div>
+					<div class="col-6">
+						@Html.EditorFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+						@Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.apellidos)
+					</div>
+					<div class="col-6">
+						@Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+						@Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.email)
+					</div>
+					<div class="col-6">
+						@Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+						@Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.password)
+					</div>
+					<div class="col-6">
+						@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control search mar-0", @type = "password" } })
+						@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.tipo)
+					</div>
+					<div class="col-6">
+						@Html.EnumDropDownListFor(m => m.tipo, htmlAttributes: new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.foto)
+					</div>
+
+					<div class="col-6">
+						<input type="file" name="file" class="form-control search mar-0" />
+						@Html.Hidden("foto", "")
+						@Html.ValidationMessageFor(model => model.foto, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.localesId)
+					</div>
+
+					<div class="col-6">
+						@Html.DropDownList("localesId", (SelectList)ViewBag.localsId, "Seleccionar local", new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.foto, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="btn btn-default">Registrar</button>
+				</div>
+			</div>
+		}
+	</div>
+</div>

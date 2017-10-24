@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.programas>
+
+@{
+	ViewBag.Title = "Programas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "prg_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+
+}
+
+<div class="container">
+    <div class="card">
+        @Html.ActionLink("Registrar Programa", "Create", null, new { @class = "btn btn-small btn-default pull-right mar-top-10", style = ViewBag.DisplayNone })
+
+        <label class="switch pull-right mar-rig-10  mar-top-10">
+            <input type="checkbox" name="deleteds" id="show-deleted" value="1" />
+            <span class="slider round"></span>
+        </label>
+
+        <div class="text-normal pull-right mar-rig-5 mar-top-10">Ver programas eliminados</div>
+
+        <h3 class="title mar-bot-30"><u>Programas</u></h3>
+
+        <table class="table">
+            <tr>
+                <th width="20%" class="text-left">
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th width="10%" class="text-left">
+                    @Html.DisplayNameFor(model => model.semanas)
+                </th>
+                <th width="25%" class="text-left">
+                    @Html.DisplayNameFor(model => model.created_at)
+                </th>
+                <th width="25%" class="text-left">
+                    @Html.DisplayNameFor(model => model.updated_at)
+                </th>
+                <th width="10%">Acciones</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr class="@(@item.deleted_at != null ? "deleted" : "")">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.semanas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_at)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updated_at)
+                    </td>
+                    <td class="td-actions">
+                       @foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+					   {
+						   switch (p.codigo_interno)
+						   {
+							   case "prg_update":
+								<a href="@Url.Action("Edit", "Programas", new { id = item.id })">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+								</a>
+								   break;
+							   case "prg_updateApp":
+								<a href="@Url.Action("Customize", "Programas", new { id = item.id })">
+									<i class="fa fa-rocket" aria-hidden="true"></i>
+								</a>
+								   break;
+							   case "prg_details":
+								<a href="@Url.Action("Details", "Programas", new { id = item.id })">
+									<i class="fa fa-info" aria-hidden="true"></i>
+								</a>
+								   break;
+							   case "prg_delete":
+								   if (item.deleted_at == null)
+								   {
+									<a href="@Url.Action("Delete", "Programas", new { id = item.id })">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</a>
+								   }
+								   else
+								   {
+									<a href="@Url.Action("Restore", "Programas", new { id = item.id })">
+										<i class="fa fa-undo" aria-hidden="true"></i>
+									</a>
+								   }
+								   break;
+							   default:
+								   break;
+						   }
+					   }
+
+                    </td>
+                </tr>
+        }
+        </table>
+    </div>
+</div>

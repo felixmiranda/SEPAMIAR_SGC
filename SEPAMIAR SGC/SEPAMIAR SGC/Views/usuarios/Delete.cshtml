@@ -1,0 +1,106 @@
+﻿@model SEPAMIAR_SGC.Models.usuarios
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card" style="max-height: 500px; overflow: auto">
+        @Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+        <h3 class="title mar-bot-30"><u>Eliminar Usuario</u></h3>
+
+        <h4>¿Estás seguro que quieres eliminar esto?</h4>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.codigo)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.codigo)
+            </div>
+        </div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.nombres)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.nombres)
+            </div>
+        </div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.apellidos)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.apellidos)
+            </div>
+        </div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.email)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.email)
+            </div>
+        </div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.tipo)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.tipo)
+            </div>
+        </div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.locales.nombre)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.locales.nombre)
+			</div>
+		</div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.created_at)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.created_at)
+            </div>
+        </div>
+
+        <div class="row mar-bot-15">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.updated_at)
+            </div>
+
+            <div class="col-6">
+                @Html.DisplayFor(model => model.updated_at)
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="text-center">
+                <input type="submit" value="Eliminar" class="btn btn-small btn-default mar-rig-10" />
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-small btn-default" })
+            </div>
+        }
+    </div>
+</div>

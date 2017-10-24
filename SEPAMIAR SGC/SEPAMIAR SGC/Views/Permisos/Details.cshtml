@@ -1,0 +1,39 @@
+﻿@model SEPAMIAR_SGC.Models.permisos
+
+@{
+	ViewBag.Title = "Detalles";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+	<div class="card" style="max-height: 500px; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Detalles del Permiso</u></h3>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.codigo_interno)
+			</div>
+			<div class="col-6">
+				@Html.DisplayFor(model=>model.codigo_interno)
+			</div>
+		</div>
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.nombre)
+			</div>
+			<div class="col-6">
+				@Html.DisplayFor(model => model.nombre)
+			</div>
+		</div>
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.created_at)
+			</div>
+			<div class="col-6">
+				@Html.DisplayFor(model => model.created_at)
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Marketing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-5">
+			<div class="card">
+				@using (Html.BeginForm("GetClient", "Clientes"))
+			{
+					<h3 class="title">
+						<u>Buscar cliente</u>
+					</h3>
+
+					<input type="text" name="Value" class="form-control search mar-bot-15" placeholder="Ingrese código del cliente" />
+
+					<div class="text-right">
+						<button type="submit" class="btn btn-default">Buscar cliente</button>
+					</div>
+			}
+			</div>
+		</div>
+		@*<div class="col-7">
+				<div class="card">
+					<h3 class="title">
+						<u>Accesos Rápidos</u>
+					</h3>
+					@Html.ActionLink("Registrar Cliente", "Create", null, new { @data_role = "modal", @data_target = "#search-in-prospectos", @class = "btn btn-default" })
+						<a href="@Url.Action("Create","Prospectos")" class="btn btn-default">Registrar Prospecto</a>
+						@Html.ActionLink("Renovar Cliente", "Create", null, new { @data_role = "modal", @data_target = "#search-in-clientes", @class = "btn btn-default" })
+				</div>
+			</div>*@
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Programas")" class="flex-center">
+					<img src="@Url.Content("~/Images/programs.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Programas</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

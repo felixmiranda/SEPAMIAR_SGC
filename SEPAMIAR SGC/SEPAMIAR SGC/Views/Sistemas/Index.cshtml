@@ -1,0 +1,164 @@
+﻿
+@{
+	ViewBag.Title = "Sistemas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-8">
+			<div class="card">
+				@using (Html.BeginForm("GetUserPasses", "UsuarioPermisos"))
+			{
+					<h3 class="title">
+						<u>Permisos de usuario</u>
+					</h3>
+
+					<input type="text" name="Value" class="form-control search mar-bot-15" placeholder="Ingrese correo del usuario" />
+
+					<div class="text-right">
+						<button type="submit" class="btn btn-default">Buscar usuario</button>
+					</div>
+			}
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				@using (Html.BeginForm("GetClient", "Clientes"))
+			{
+					<h3 class="title">
+						<u>Buscar cliente</u>
+					</h3>
+
+					<input type="text" name="Value" class="form-control search mar-bot-15" placeholder="Ingrese código del cliente" />
+
+					<div class="text-right">
+						<button type="submit" class="btn btn-default">Buscar cliente</button>
+					</div>
+			}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index","Clientes")" class="flex-center">
+					<img src="@Url.Content("~/Images/clients.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Clientes</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Usuarios")" class="flex-center">
+					<img src="@Url.Content("~/Images/users.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Usuarios</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index","Permisos")" class="flex-center">
+					<img src="@Url.Content("~/Images/lock.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Permisos</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Programas")" class="flex-center">
+					<img src="@Url.Content("~/Images/programs.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Programas</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Salas")" class="flex-center">
+					<img src="@Url.Content("~/Images/salas.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Salas</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Locales")" class="flex-center">
+					<img src="@Url.Content("~/Images/local.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Locales</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-8">
+			<div class="card">
+				<a href="@Url.Action("Index", "CongelamientoSemanas")" class="flex-center">
+					<img src="@Url.Content("~/Images/icon-freezing.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Configuración de Congelamientos</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Reportes")" class="flex-center">
+					<img src="@Url.Content("~/Images/icon-reports.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Reportes</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Horarios")" class="flex-center">
+					<img src="@Url.Content("~/Images/calendar.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Horarios</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "SolicitudPermisos")" class="flex-center">
+					<img src="@Url.Content("~/Images/unlock.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Aprobaciones Solicitadas</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Config")" class="flex-center">
+					<img src="@Url.Content("~/Images/config.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Configuración</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Nutricionistas")" class="flex-center">
+					<img src="@Url.Content("~/Images/clients.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Nutricionistas</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Vendedores")" class="flex-center">
+					<img src="@Url.Content("~/Images/clients.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Vendedores</span>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="card">
+				<a href="@Url.Action("Index", "Correos")" class="flex-center">
+					<img src="@Url.Content("~/Images/icon-mail.png")" width="35" height="35" class="mar-rig-10" />
+					<span>Mail Center</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

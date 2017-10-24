@@ -1,0 +1,252 @@
+﻿@model SEPAMIAR_SGC.Models.venta_usuarios
+
+@{
+	ViewBag.Title = "Crear";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+	<div class="card" style="max-height: 500px;">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title"><u>Creación de Venta</u></h3>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			@Html.Hidden("clientId", (ViewData["clienteData"] as SEPAMIAR_SGC.Models.clientes).id_alt)
+			<div class="">
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						<label>Id Cliente</label>
+					</div>
+					<div class="col-9">
+						@Html.TextBox("clientId", (ViewData["clienteData"] as SEPAMIAR_SGC.Models.clientes).id_alt, new { @class = "form-control search mar-0", @readonly = "readonly" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						<label>Local</label>
+					</div>
+
+					<div class="col-9">
+						@Html.DropDownList("local_id", null, htmlAttributes: new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.local_id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@*AACC*@
+				<div class="row mar-bot-15">
+					@Html.Label("Nombre Cliente:", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.TextBox("clientName", (ViewData["clienteData"] as SEPAMIAR_SGC.Models.clientes).nombres, new { @class = "form-control search mar-0", @readonly = "readonly" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Cod. Vendedor", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.TextBox("vendedor_id", Session["UserId"], new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.vendedor_id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Fecha de Inicio", new { @class = "col-3" })
+					<div class="col-9">
+						@Html.TextBox("fecha_inicio", (string)ViewBag.feInit, new { @class = "form-control search mar-0 datepicker" })
+						@Html.ValidationMessageFor(model => model.fecha_inicio, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.LabelFor(model => model.semanas_precio_id, htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.DropDownList("semanas_precio_id", (IEnumerable<SelectListItem>)ViewBag.semanas_id, new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.semanas_precio_id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Fecha de Fin", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.EditorFor(model => model.fecha_fin, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+						@Html.ValidationMessageFor(model => model.fecha_fin, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Días de Congelamiento", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.TextBoxFor(m => m.cantidad_dias_congelamiento, new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.cantidad_dias_congelamiento, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@Html.HiddenFor(m => m.solicitud_permiso_congelamiento)
+
+				<div class="row mar-bot-15">
+					@Html.Label("Tipo de Ingreso", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.EnumDropDownListFor(model => model.tipo_ingreso, htmlAttributes: new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.tipo_ingreso, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Campaña de Mkt", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.DropDownList("campana_marketing_id", (IEnumerable<SelectListItem>)ViewBag.campanasMkt_id, new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.campana_marketing_id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("# Boleta o Factura", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.EditorFor(model => model.numero_boleta, new { htmlAttributes = new { @class = "form-control search mar-0", @readonly = "readonly" } })
+						@Html.ValidationMessageFor(model => model.numero_boleta, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					@Html.Label("Tipo de Pago", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.EnumDropDownListFor(model => model.tipo_pago, htmlAttributes: new { @class = "form-control search mar-0" })
+						@Html.ValidationMessageFor(model => model.tipo_pago, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@Html.HiddenFor(m => m.atendido)
+
+				<div class="row mar-bot-15">
+					@Html.Label("Monto", htmlAttributes: new { @class = "col-3" })
+					<div class="col-9">
+						@Html.EditorFor(m => m.monto, new { htmlAttributes = new { @class = "form-control search mar-0", @readonly = "readonly" } })
+						@Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@Html.HiddenFor(m => m.created_at)
+
+				<div class="text-center mar-bot-15">
+					<input type="submit" value="Create" class="btn btn-default" />
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+@section scripts
+{
+	<script>
+		$(document).ready(function () {
+
+			$.getJSON(
+					 '/SemanasPrecios/GetFreezingInfo',
+					 { id: $("#semanas_precio_id").val() }
+					).done(function (json) {
+						var frzDays = json.days;
+
+						$("#cantidad_dias_congelamiento").val(frzDays.toString());
+						$("#solicitud_permiso_congelamiento").val(false);
+						$("#monto").val(json.price.toString());
+						var feInitAsDate = new Date($("#fecha_inicio").val());
+						var feEndAsDate = new Date();
+						var selWeeksToDays = json.weeks * 7;
+						feEndAsDate.setDate(feInitAsDate.getDate() + selWeeksToDays);
+						$("#fecha_fin").val(feEndAsDate.getFullYear().toString() + "-" + (feEndAsDate.getMonth() + 1).toString() + "-" + feEndAsDate.getDate().toString());
+					}).fail(function (jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log("Request Failed: " + err);
+					})
+
+			var prgDur = 28;
+
+			$("#fecha_inicio").change(function () {
+				var fechaString = $(this).val();
+				var fechaDate = new Date(fechaString);
+				var fechaAdd = new Date(prgDur * 24 * 60 * 60 * 1000);
+
+				var val = fechaDate.valueOf() + fechaAdd.valueOf();
+
+				var fechaFin = new Date(val);
+
+				var sem = fechaAdd.getDate() / 7;
+
+				console.log(fechaFin.toString());
+
+				$("#fecha_fin").val(fechaFin.getFullYear().toString() + "-" + (fechaFin.getMonth() + 1).toString() + "-" + fechaFin.getDate().toString());
+				$("#cantidad_semanas").val(Math.round(sem));
+			});
+
+			$("#cantidad_dias_congelamiento").change(function () {
+				$("#solicitud_permiso_congelamiento").val(true);
+			})
+
+			$("#semanas_precio_id").change(function () {
+				$.getJSON(
+					 '/SemanasPrecios/GetFreezingInfo',
+					 { id: $("#semanas_precio_id").val() }
+					).done(function (json) {
+						var frzDays = json.days;
+
+						$("#cantidad_dias_congelamiento").val(frzDays.toString());
+						$("#solicitud_permiso_congelamiento").val(false);
+						$("#monto").val(json.price.toString());
+						var feInitAsDate = new Date($("#fecha_inicio").val());
+						var feEndAsDate = new Date();
+						var selWeeksToDays = json.weeks * 7;
+						feEndAsDate.setDate(feInitAsDate.getDate() + selWeeksToDays);
+						$("#fecha_fin").val(feEndAsDate.getFullYear().toString() + "-" + (feEndAsDate.getMonth() + 1).toString() + "-" + feEndAsDate.getDate().toString());
+					}).fail(function (jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log("Request Failed: " + err);
+					})
+			});
+
+			$("#campana_marketing_id").change(function () {
+				$.getJSON(
+					 '/CampanaMarketing/GetCampaignInfo',
+					 { id: $("#campana_marketing_id").val() }
+					).done(function (json) {
+						var promo = 1 - json.dscto;
+						var monto = $("#monto").val();
+
+						var newMonto = monto * promo;
+
+						$("#monto").val(newMonto.toString());
+					}).fail(function (jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log("Request Failed: " + err);
+					})
+			});
+
+			//$("#fecha_fin").change(function () {
+			//	var valEnd = new Date($("#fecha_fin").val());
+			//	var valInit = new Date($("#fecha_inicio").val());
+
+			//	var datesDifAsInt = valEnd.valueOf() - valInit.valueOf();
+			//	var datesDifAsDate = new Date(datesDifAsInt);
+
+			//	var yearsDif = valEnd.getYear() - valInit.getYear();
+			//	var monthsDif = valEnd.getMonth() - valInit.getMonth();
+			//	var daysDif = datesDifAsDate.getDate();
+
+			//	if (monthsDif > 0) {
+			//		var weeks = (daysDif / 7) + (monthsDif * 4.3);
+			//		console.log(weeks);
+			//		$("#cantidad_semanas").val(Math.round(weeks));
+			//	} else {
+			//		var weeks = daysDif / 7;
+			//		$("#cantidad_semanas").val(Math.round(weeks));
+			//	}
+			//});
+		});
+	</script>
+}

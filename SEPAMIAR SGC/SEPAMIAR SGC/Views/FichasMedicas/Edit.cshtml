@@ -1,0 +1,635 @@
+﻿@model SEPAMIAR_SGC.Models.fichas_medicas
+
+@{
+	ViewBag.Title = "Edit";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+	<div class="card" style="max-height: 75vh; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Editar Ficha Médica</u></h3>
+
+		<div>
+			@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "c-1", @enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
+				
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				@Html.HiddenFor(m=>m.id)
+				@Html.HiddenFor(m=>m.programa_id)
+				@Html.HiddenFor(m=>m.cliente_id)
+				@Html.Hidden("regimeInitialCount", (int)ViewBag.regimeInitialCount)
+
+				<h2 class="sub-title mar-bot-20"><u>Pesos y Medidas</u></h2>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.LabelFor(m => m.estatura)
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.estatura, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+					<div class="col-4">
+						@Html.EnumDropDownListFor(m => m.contextura, "Seleccionar Contextura", htmlAttributes: new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-20">
+					<div class="col-2">
+						@Html.LabelFor(m => m.peso_actual)
+					</div>
+					<div class="col-2">
+						@Html.EditorFor(m => m.peso_actual, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+					<div class="col-2">
+						@Html.LabelFor(m => m.peso_deseado)
+					</div>
+					<div class="col-2">
+						@Html.EditorFor(m => m.peso_deseado, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+					<div class="col-2">
+						@Html.LabelFor(m => m.peso_ideal)
+					</div>
+					<div class="col-2">
+						@Html.EditorFor(m => m.peso_ideal, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+
+				<h2 class="sub-title mar-bot-20"><u>Datos Médicos</u></h2>
+
+				<div class="col-3 mar-bot-15">
+					<img src="~/Images/icon-cardio.png" alt="Cardio Icon" width="34" />
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						Presión Arterial Sistolica
+					</div>
+					<div class="col-2">
+						@if (ViewBag.currentCardioControl != null)
+						{
+							<input type="text" name="presion_arterial_sistolica" id="presion_arterial_sistolica" value="@((ViewBag.currentCardioControl as SEPAMIAR_SGC.Models.CardioInfo).presion_arterial_sistolica)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="presion_arterial_sistolica" id="presion_arterial_sistolica" value="" class="form-control search mar-0" readonly="readonly" />
+						}
+					</div>
+					<div class="col-2">
+						Aptitud
+					</div>
+					<div class="col-3">
+						@if (ViewBag.currentCardioControl != null)
+						{
+							@Html.EnumDropDownListFor(m => m.cardio.First().cardiologia_aprobacion, new { @class = "form-control search mar-0", @readonly = "readonly", @disabled = "disabled", @value = "" + (ViewBag.currentCardioControl as SEPAMIAR_SGC.Models.CardioInfo).cardiologia_aprobacion.ToString() + "" })
+						}
+						else
+						{
+							@Html.DropDownList("cardiologia_aprobacion", EnumHelper.GetSelectList(typeof(SEPAMIAR_SGC.Models.CardioSuittable)), "Aptitud",new { @class = "form-control search mar-0", @readonly = "readonly", @disabled="disabled" })
+						}
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						Presión Arterial Diastolica
+					</div>
+					<div class="col-2">
+						@if (ViewBag.currentCardioControl != null)
+						{
+							<input type="text" name="presion_arterial_diastolica" id="presion_arterial_diastolica" value="@((ViewBag.currentCardioControl as SEPAMIAR_SGC.Models.CardioInfo).presion_arterial_diastolica)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="presion_arterial_diastolica" id="presion_arterial_diastolica" value="" class="form-control search mar-0" readonly="readonly" />
+						}
+					</div>
+					<div class="col-3">
+						Último examen vigente
+					</div>
+					<div class="col-3">
+						@if (ViewBag.currentCardioControl != null)
+						{
+							<label>@((ViewBag.currentCardioControl as SEPAMIAR_SGC.Models.CardioInfo).fecha.ToShortDateString())</label>
+						}
+						else
+						{
+							<input type="text" name="fecha" id="fecha" value="" class="form-control search mar-0 ui-datepicker" readonly="readonly" />
+						}
+					</div>
+				</div>
+			}
+
+			@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "c-2", @enctype = "multipart/form-data" }))
+			{
+				<div class="col-3 mar-bot-15">
+					<img src="~/Images/icon-contextures.png" alt="Contextures Icon" width="34" />
+					<a id="addControlsRow" href="javascript:void(0)">
+						<img src="~/Images/icon-add.png" alt="Add Icon" width="19" />
+					</a>
+				</div>
+
+				<div class="row mar-bot-15">
+					<table class="pure-table pure-table-horizontal" id="controlsTable">
+						<thead>
+							<tr>
+								<th width="16%">Fecha</th>
+								<th width="12%">ACT</th>
+								<th width="12%">MME (Kg)</th>
+								<th width="12%">MGC (Kg)</th>
+								<th width="14%">IMC (Kg/m2)</th>
+								<th width="12%">PGC (%)</th>
+								<th width="10%">RCC</th>
+								<th width="12%">Peso</th>
+								<th style="display:none">Id</th>
+								<th style="display:none">Created At</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if (ViewBag.controlsLst != null)
+							{
+								foreach (string s in ViewBag.controlsLst as List<string>)
+								{
+									@Html.Raw(s);
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+
+			@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "c-3", @enctype = "multipart/form-data" }))
+			{
+				<div class="col-3 mar-bot-15">
+					<img src="~/Images/icon-labs.png" alt="Labs Icon" width="20" />
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.DisplayNameFor(m => m.laboratorio.First().hemoglobina)
+					</div>
+					<div class="col-2">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="hemoglobina" id="hemoglobina" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).hemoglobina)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="hemoglobina" id="hemoglobina" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+					<div class="col-2">
+						@Html.DisplayNameFor(m => m.laboratorio.First().colesterol)
+					</div>
+					<div class="col-3">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="colesterol" id="colesterol" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).colesterol)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="colesterol" id="colesterol" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.DisplayNameFor(m => m.laboratorio.First().glucosa_basal)
+					</div>
+					<div class="col-2">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="glucosa_basal" id="glucosa_basal" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).glucosa_basal)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="glucosa_basal" id="glucosa_basal" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+					<div class="col-2">
+						@Html.DisplayNameFor(m => m.laboratorio.First().trigliceridos)
+					</div>
+					<div class="col-3">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="trigliceridos" id="trigliceridos" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).trigliceridos)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="trigliceridos" id="trigliceridos" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.DisplayNameFor(m => m.laboratorio.First().creatinina)
+					</div>
+					<div class="col-2">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="creatinina" id="creatinina" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).creatinina)" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="creatinina" id="creatinina" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+					<div class="col-2">
+						@Html.DisplayNameFor(m => m.laboratorio.First().fecha)
+					</div>
+					<div class="col-3">
+						@if (ViewBag.currentLabControl != null)
+						{
+							<input type="text" name="fecha" id="fecha" value="@((ViewBag.currentLabControl as SEPAMIAR_SGC.Models.LabResults).fecha.ToShortDateString())" class="form-control search mar-0" readonly="readonly" />
+						}
+						else
+						{
+							<input type="text" name="fecha" id="fecha" value="" class="form-control search mar-0 " readonly="readonly" />
+						}
+					</div>
+				</div>
+
+				<h2 class="sub-title mar-bot-30"><u>Historial de Salud</u></h2>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						En caso de fumar, indicar frecuencia:
+					</div>
+					<div class="col-3">
+						@Html.EnumDropDownListFor(m => m.frec_fumador, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						En caso de consumir bebidas alcohólicas, indicar frecuencia:
+					</div>
+					<div class="col-3">
+						@Html.EnumDropDownListFor(m => m.frec_bebedor, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-12">
+						En caso de consumir o haber consumido alguna de las siguientes drogas, indicar cuales:
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.cortisona, new { }) Cortisona<br />
+					</div>
+					<div class="col-4">
+						@Html.CheckBoxFor(m => m.esteroidesAnabolicos, new { }) Esteroides Anabólicos<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.anfetaminas, new { }) Anfetaminas<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.marihuana, new { }) Marihuana<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.otra, new { }) Otra<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-4">
+						@Html.CheckBoxFor(m => m.ninguna, new { }) Ninguna<br />
+					</div>
+				</div>
+
+				<h2 class="sub-title mar-bot-30"><u>Menstruación y Menopausia</u></h2>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						En caso de tener hijos, indicar la cantidad:
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.menstruacion_menopausia.cantidad_hijos, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Si la respuesta anterior es mayor a 0, seleccionar:
+					</div>
+					<div class="col-3">
+						@Html.EnumDropDownListFor(m => m.menstruacion_menopausia.tipo_parto, "Seleccionar tipo", new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						En caso de haber pasado por el proceso de la menopausia, indicar la edad:
+					</div>
+					<div class="col-3">
+						@Html.EditorFor(m => m.menstruacion_menopausia.edad_menopausia, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-9">
+						Si la respuesta anterior es mayor a 0, indicar si el proceso aún continúa:
+					</div>
+					<div class="col-3">
+						<input id="menstruacion_menopausia_activa" type="checkbox" name="menopausia_activa" value="false" />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						En caso de recibir algún tratamiento hormonal, especificar:
+					</div>
+				</div>
+
+				<div class="row mar-bot-30">
+					<div class="col-12">
+						@Html.TextAreaFor(m => m.menstruacion_menopausia.tratamiento_hormonal, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<h2 class="sub-title mar-bot-30"><u>Antecedentes de Salud, Respiratorios, Traumatológicos y Familiares</u></h2>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique si tiene alguno de los siguientes problemas de salud:
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.gastricos, new { }) Gástricos<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.diabetes, new { }) Diabetes<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.trigliceridos_altos, new { }) Triglicéridos Altos<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.hipertiroidismo, new { }) Hipertiroidismo<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.hipotiroidismo, new { }) Hipotiroidismo<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.quistes, new { }) Quistes<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.tumores, new { }) Tumores<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.resistencia_insulina, new { }) Resistencia Insulina<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.otras_dislipidemias, new { }) Otras Dislipidemias<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.prostata, new { }) Prostata<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.renales, new { }) Renales<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.hepaticos, new { }) Hepáticos<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.presion_alta, new { }) Presión Alta<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.presion_baja, new { }) Presión Baja<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.colesterol_alto, new { }) Colesterol Alto<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.anemia, new { }) Anemia<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentes.hernias, new { }) Hernias<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.estrenimiento, new { }) Estreñimiento<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentes.no_mencionada, new { }) No Mencionada<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique si tiene alguno de los siguientes problemas traumatológicos:
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-4">
+						@Html.CheckBoxFor(m => m.problemas_traumatologicos.dolores_articulares, new { }) Dolores Articulares (Artritis, Artrosis)<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.problemas_traumatologicos.osteoporosis, new { }) Osteoporosis<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-4">
+						@Html.CheckBoxFor(m => m.problemas_traumatologicos.problemas_columna, new { }) Problemas de Columna<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-12">
+						@Html.TextAreaFor(m => m.problemas_traumatologicos.problemas_columna_texto, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-4">
+						@Html.CheckBoxFor(m => m.problemas_traumatologicos.otras_lesiones, new { }) Otras lesiones importantes<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-12">
+						@Html.TextAreaFor(m => m.problemas_traumatologicos.otras_lesiones_texto, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique si tiene alguno de los siguientes problemas respiratorios:
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.asma_cronica, new { }) Asma Crónica<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.tos_cronica, new { }) Tos Crónica<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.resfriados_continuos, new { }) Resfriados Continuos<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.bronquitis, new { }) Bronquitis<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.rinitis_alergica, new { }) Rinitis Alérgica<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.sinusitis, new { }) Sinusitis<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.amigdalitis, new { }) Amigdalitis<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.problemas_respiratorios.otros, new { }) Otros<br />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique si tiene alguno de los siguientes antecedentes:
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentas_generales.obesidad, new { }) Obesidad<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentas_generales.hipertension, new { }) Hipertensión<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentas_generales.diabetes, new { }) Diabetes<br />
+					</div>
+					<div class="col-2">
+						@Html.CheckBoxFor(m => m.antecedentas_generales.cardiopatias, new { }) Cardiopatías<br />
+					</div>
+					<div class="col-3">
+						@Html.CheckBoxFor(m => m.antecedentas_generales.no_mencionada, new { }) No Mencionada<br />
+					</div>
+				</div>
+
+				<h2 class="sub-title mar-bot-30"><u>Anamnesis Nutricional</u></h2>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique si consume alimentos fuera de casa:
+					</div>
+					<div class="col-1">
+						@Html.CheckBoxFor(m => m.anamnesis_nutricional.alimentos_fuera_de_casa, new { })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Si la respuesta anterior es Si:
+					</div>
+					<div class="col-3">
+						@Html.EnumDropDownListFor(m => m.anamnesis_nutricional.frecAlimentosFuera, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique tipo de comida:
+					</div>
+					<div class="col-5">
+						@Html.TextAreaFor(m => m.anamnesis_nutricional.tipo_alimentos_fuera, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Indique cantidad de vasos de agua consumidos al día:
+					</div>
+					<div class="col-5">
+						@Html.TextBoxFor(m => m.anamnesis_nutricional.cantidad_vasos_agua_dia, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Detalle los alimentos y/o preparaciones de su preferencia:
+					</div>
+					<div class="col-5">
+						@Html.TextAreaFor(m => m.anamnesis_nutricional.alimentos_preferencia, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Detalle los alimentos y/o preparaciones que le desagradan:
+					</div>
+					<div class="col-5">
+						@Html.TextAreaFor(m => m.anamnesis_nutricional.alimentos_no_preferencia, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-7">
+						Detalle los alimentos y/o preparaciones que le hacen daño:
+					</div>
+					<div class="col-5">
+						@Html.TextAreaFor(m => m.anamnesis_nutricional.alimentos_daninos, new { @class = "form-control search mar-0" })
+					</div>
+				</div>
+			}
+
+			@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "c-4", @enctype = "multipart/form-data" }))
+			{
+				<div class="row mar-bot-15">
+					<div class="">
+						Regimen de alimentación diario
+					</div>
+					<a id="addFoodRegime" href="javascript:void(0)">
+						<img src="~/Images/icon-add.png" alt="Food Regime Add Icon" width="19" />
+					</a>
+				</div>
+
+				<div id="regimenComida" class="row mar-bot-15">
+					@if (ViewBag.regimenLst != null)
+					{
+						foreach (string s in ViewBag.regimenLst as List<string>)
+						{
+							@Html.Raw(s)
+						}
+					}
+				</div>
+			}
+
+		</div>
+
+		<div id="save-btn-container" class="text-center mar-bot-15">
+			<button id="edit-mh" name="edit-mh" type="button" class="btn btn-default" style="z-index:0;">Guardar</button>
+		</div>
+	</div>
+</div>
+
+@section scripts
+	{
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+	<script src="@Url.Content("~/Scripts/JSFichasMedicas.js")"></script>
+}
+

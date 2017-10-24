@@ -1,0 +1,91 @@
+﻿@model SEPAMIAR_SGC.Models.citas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>citas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.clientes.codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientes.codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nutricionistas.usuario_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nutricionistas.usuario_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.programas.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.programas.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted_at)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

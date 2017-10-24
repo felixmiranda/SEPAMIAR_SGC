@@ -1,0 +1,188 @@
+﻿@model SEPAMIAR_SGC.Models.correos
+
+@{
+	ViewBag.Title = "Enviar Correos";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="card" style="max-height: 75vh; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>@Model.NombreMail</u></h3>
+
+		<div>
+			@using (Html.BeginForm("Send", "Correos", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+			{
+				@Html.HiddenFor(m => m.Id)
+				@Html.HiddenFor(m => m.CreatedAt)
+				@Html.HiddenFor(m => m.CreatedBy)
+				@Html.HiddenFor(m => m.UpdatedAt)
+				@Html.HiddenFor(m => m.UpdatedBy)
+				@Html.Hidden("To","")
+
+				<div class="row mar-bot-15">
+					<div id="mail-rules" class="col-3 border-right">
+						<div class="row">
+							<label class="mar-bot-10">Filtro de contactos</label>
+							@Html.DropDownList("selectTable", new SelectList(ViewBag.tablas, "tabla", "nombre"), new { @class = "form-control search mar-0 mar-bot-10" })
+						</div>
+						<div class="row">
+							<label class="mar-bot-10">Reglas</label>
+							<a id="add-filter" href="javascript:void(0)"><img src="@Url.Content("~/Images/icon-add.png")" width="28" alt="Add Filter" class="pull-right" /></a>
+						</div>
+					</div>
+
+					<div class="col-9">
+						<div class="row">
+							<label class="mar-bot-10">De:</label>
+							<input type="text" name="FromMail" value="@ViewBag.From" class="form-control search mar-0 mar-bot-10" readonly />
+						</div>
+						<div class="row">
+							<label class="mar-bot-10">Asunto:</label>
+							@Html.TextBoxFor(m => m.Asunto, htmlAttributes: new { @class = "form-control search mar-0 mar-bot-10", @readonly = "readonly" })
+						</div>
+						<div class="row">
+							<label class="mar-bot-10">Archivos Adjuntos:</label>
+							<input id="upload-files" type="file" name="files" value="Seleccionar Archivos" multiple />
+						</div>
+						<div class="row">
+							<label class="mar-bot-10">Contenido:</label>
+							@Html.TextAreaFor(m => m.Contenido, htmlAttributes: new { @class = "form-control mail search mar-0 mar-bot-10", rows = "10" })
+						</div>
+					</div>
+				</div>
+
+				<hr />
+
+				<div class="row mar-bot-15 pull-right">
+					<input id="send-button" type="submit" name="Send" value="Enviar" class="btn btn-default mar-rig-20" />
+				</div>
+
+
+			}
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<script>
+		$(document).ready(function () {
+
+			var filtersCount = 0;
+			var selectedTable = "";
+			var queriedRules = new Array();
+
+			$("#add-filter").on("click", function () {
+				var filtersDiv = $('#mail-rules');
+				var tablesSelect = $('#selectTable');
+				tablesSelect.attr('disabled', 'disabled');
+
+				if (selectedTable == "") {
+					selectedTable = tablesSelect.val();
+
+					$.get("/Correos/MailRules", { t: selectedTable }, function (data, status) {
+						for (var i = 0; i < data.length; i++) {
+							var d = new Object();
+							d.Nombre = data[i].Nombre;
+							d.Operador = data[i].Operador;
+							d.Condicion = data[i].Condicion;
+							queriedRules.push(d);
+						}					
+
+						var selectId = "F-" + filtersCount;
+						var dropdownId = "#" + selectId;
+						var select = "<select id='" + selectId + "' data-filter='f' class='form-control search mar-0 mar-bot-10' name='filtro'></select>";
+						filtersDiv.append(select);
+
+						var dropdown = $(dropdownId)
+
+						for (var i = 0; i < data.length; i++) {
+							if (i == 0) {
+								dropdown.append("<option id='O-" + selectId + "-" + i.toString() + "' selected='selected' value='" + queriedRules[i].Condicion + "'>" + queriedRules[i].Nombre + "</option>").data("operador", queriedRules[i].Operador);
+								var doc = document.getElementById("O-" + selectId + "-" + i.toString());
+								doc.setAttribute('data-operador', queriedRules[i].Operador);
+							}
+							else {
+								dropdown.append("<option id='O-" + selectId + "-" + i.toString() + "' selected='selected' value='" + queriedRules[i].Condicion + "'>" + queriedRules[i].Nombre + "</option>").data("operador", queriedRules[i].Operador);
+								var doc = document.getElementById("O-" + selectId + "-" + i.toString());
+								doc.setAttribute('data-operador', queriedRules[i].Operador);
+							}
+						}
+
+						$('select[data-filter="f"]').on("change", function () {
+							getMailsAndCount();
+						});
+
+						filtersCount++;
+					});
+				} else {
+					var selectId = "F-" + filtersCount;
+					var dropdownId = "#" + selectId;
+					var select = "<select id='" + selectId + "' data-filter='f' class='form-control search mar-0 mar-bot-10' name='filtro'></select>";
+					filtersDiv.append(select);
+
+					var dropdown = $(dropdownId)
+
+					for (var i = 0; i < queriedRules.length; i++) {
+						if (i == 0) {
+							dropdown.append("<option id='O-" + selectId + "-" + i.toString() + "' selected='selected' value='" + queriedRules[i].Condicion + "'>" + queriedRules[i].Nombre + "</option>").data("operador", queriedRules[i].Operador);
+							var doc = document.getElementById("O-" + selectId + "-" + i.toString());
+							doc.setAttribute('data-operador', queriedRules[i].Operador);
+						}
+						else {
+							dropdown.append("<option id='O-" + selectId + "-" + i.toString() + "' selected='selected' value='" + queriedRules[i].Condicion + "'>" + queriedRules[i].Nombre + "</option>").data("operador", queriedRules[i].Operador);
+							var doc = document.getElementById("O-" + selectId + "-" + i.toString());
+							doc.setAttribute('data-operador', queriedRules[i].Operador);
+						}
+					}
+
+					$('select[data-filter="f"]').on("change", function () {
+						getMailsAndCount();
+					});
+
+					filtersCount++;
+				}
+			});
+
+			function getMailsAndCount() {
+				var conditions = new Array();
+
+				for (var i = 0; i < filtersCount; i++) {
+					var obj = Object();
+					var id = "#F-" + i;
+
+					var control = $(id);
+					var r = control.val();
+					var o = control.data();
+
+					obj.rule = r;
+					obj.operator = Number(o.operador);
+
+					conditions.push(obj);
+				}
+
+				if (conditions.length > 0) {
+					var jsonAsString = JSON.stringify(conditions);
+					var getting = $.get("/Correos/GetClientMails", { json: jsonAsString, table: selectedTable })
+
+					getting.done(function (data) {
+						$("#send-button").val("Enviar a " + data.length + " clientes.");
+						$("#To").val(JSON.stringify(data))
+					})
+
+					getting.fail(function (data) {
+						alert("Error al obtener correos de clientes. " + data)
+					})
+				}
+
+			};
+
+
+
+
+
+		});
+	</script>
+}

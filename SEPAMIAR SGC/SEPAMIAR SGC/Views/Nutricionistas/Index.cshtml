@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.nutricionistas>
+
+@{
+	ViewBag.Title = "Nutricionistas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "nutri_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+
+		@Html.ActionLink("Crear Nutricionista", "Create", new { @clientId = ViewBag.clientId }, new { @class = "btn btn-default btn-small pull-right", style = ViewBag.DisplayNone })
+
+		<label class="switch pull-right mar-rig-10  mar-top-10">
+			<input type="checkbox" name="deleteds" id="show-deleted" value="1" />
+			<span class="slider round"></span>
+		</label>
+
+		<div class="text-normal pull-right mar-rig-5 mar-top-10">Ver nutricionistas eliminados</div>
+
+		<h3 class="title mar-bot-30"><u>Nutricionistas</u></h3>
+		<table class="table">
+			<tr>
+				<th width="10%" class="text-left">
+					@Html.DisplayNameFor(model => model.usuarios.codigo)
+				</th>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.usuarios.nombres)
+				</th>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.jefe)
+				</th>
+				<th width="20%" class="text-left">
+					Creado
+				</th>
+				<th width="20%" class="text-left">
+					Actualizado
+				</th>
+				<th width="10%" class="text-left">
+					Acciones
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr class="@(item.deleted_at != null ? "deleted" : "")">
+					<td>
+						@Html.DisplayFor(modelItem => item.usuarios.codigo)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.usuarios.nombres)
+					</td>
+					<td>
+						@{ 
+							ViewBag.isBoss = (bool)item.jefe;
+						}
+
+						@Html.CheckBox("jefe",(bool)ViewBag.isBoss,new { @disabled = "disabled" })
+					</td>
+					<td>
+						@{
+							ViewBag.createdAt = item.created_at.ToShortDateString();
+						}
+						<p class="mar-0">@ViewBag.createdAt</p>
+					</td>
+					<td>
+						@{
+							ViewBag.updated_at = item.updated_at.ToShortDateString();
+						}
+						<p class="mar-0">@ViewBag.updated_at</p>
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "nutri_update":
+									<a href="@Url.Action("Edit", "Nutricionistas", new { id = item.usuario_id })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "nutri_details":
+									<a href="@Url.Action("Details", "Nutricionistas", new { id = item.usuario_id })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								case "nutri_delete":
+									if (item.deleted_at == null)
+									{
+										<a href="@Url.Action("Delete", "Nutricionistas", new { id = item.usuario_id })">
+											<i class="fa fa-trash" aria-hidden="true"></i>
+										</a>
+									}
+									else
+									{
+										<a href="@Url.Action("Restore", "Nutricionistas", new { id = item.usuario_id })">
+											<i class="fa fa-undo" aria-hidden="true"></i>
+										</a>
+									}
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

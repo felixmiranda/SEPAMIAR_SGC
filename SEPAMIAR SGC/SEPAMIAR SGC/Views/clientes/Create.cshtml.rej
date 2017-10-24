@@ -1,0 +1,9 @@
+diff a/SEPAMIAR SGC/SEPAMIAR SGC/Views/clientes/Create.cshtml b/SEPAMIAR SGC/SEPAMIAR SGC/Views/clientes/Create.cshtml	(rejected hunks)
+@@ -54,7 +54,6 @@
+                     @Html.ValidationMessageFor(model => model.documento_tipo, "", new { @class = "text-danger" })
+                 </div>
+ 
+-            <div class="col-md-10">
+                 <div class="col-7 mar-bot-15">
+                     @Html.EditorFor(model => model.celular, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Celular" } })
+                     @Html.ValidationMessageFor(model => model.celular, "", new { @class = "text-danger" })

@@ -1,0 +1,191 @@
+﻿@model SEPAMIAR_SGC.Models.clientes
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card" style="max-height: 500px;">
+        @Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+        <h3 class="title"><u>Registrar Cliente</u></h3>
+
+        @using (Html.BeginForm("Create", "Clientes", FormMethod.Post, new { @id="form-clientes", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row negative">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="col-12 mar-bot-15 bg-title">
+                    Datos Personales del Participante
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Nombres" } })
+                    @Html.ValidationMessageFor(model => model.nombres, "El campo Nombres es requerido", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EnumDropDownListFor(model => model.genero, htmlAttributes: new { @class = "form-control search mar-0" })
+                    @Html.ValidationMessageFor(model => model.genero, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Apellidos" } })
+                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EditorFor(model => model.fecha_nacimiento, new { htmlAttributes = new { @class = "form-control search mar-0 datepicker", @placeholder = "Fecha de nacimiento" } })
+                    @Html.ValidationMessageFor(model => model.fecha_nacimiento, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Teléfono" } })
+                    @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EnumDropDownListFor(model => model.documento_tipo, htmlAttributes: new { @class = "form-control search mar-0" })
+                    @Html.ValidationMessageFor(model => model.documento_tipo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.celular, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Celular" } })
+                    @Html.ValidationMessageFor(model => model.celular, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EditorFor(model => model.documento_numero, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "N° de Documento" } })
+                    @Html.ValidationMessageFor(model => model.documento_numero, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Dirección" } })
+                    @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EditorFor(model => model.distrito, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Distrito" } })
+                    @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-12 mar-bot-15">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "E-mail Personal" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-7 mar-bot-15">
+                    @Html.EditorFor(model => model.centro_laboral, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Centro Laboral" } })
+                    @Html.ValidationMessageFor(model => model.centro_laboral, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-5 mar-bot-15">
+                    @Html.EditorFor(model => model.cargo_laboral, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Cargo" } })
+                    @Html.ValidationMessageFor(model => model.cargo_laboral, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-12 mar-bot-15">
+                    @Html.EditorFor(model => model.email_empresa, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "E-mail Empresa" } })
+                    @Html.ValidationMessageFor(model => model.email_empresa, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-3 mar-bot-15">
+                    @Html.LabelFor(model => model.foto)
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    <input type="file" name="file" class="form-control search mar-0" />
+                    @Html.ValidationMessageFor(model => model.foto, "", new { @class = "text-danger" })                   
+                </div>
+            </div>
+
+            <h5 class="sub-title mar-bot-15"><u>En caso de emergencia comunicarse con:</u></h5>
+
+            <div class="row negative">
+                <div class="col-6 mar-bot-15">
+                    @Html.EditorFor(model => model.ce_nombres, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Nombres" } })
+                    @Html.ValidationMessageFor(model => model.ce_nombres, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    @Html.EditorFor(model => model.ce_telefono, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Teléfono" } })
+                    @Html.ValidationMessageFor(model => model.ce_telefono, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    @Html.EditorFor(model => model.ce_apellidos, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Apellidos" } })
+                    @Html.ValidationMessageFor(model => model.ce_apellidos, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    @Html.EditorFor(model => model.ce_celular, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "Celular" } })
+                    @Html.ValidationMessageFor(model => model.ce_celular, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-12 mar-bot-30">
+                    @Html.EditorFor(model => model.ce_email, new { htmlAttributes = new { @class = "form-control search mar-0", @placeholder = "E-mail" } })
+                    @Html.ValidationMessageFor(model => model.ce_email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row negative">
+                <div class="col-4 mar-bot-30">
+                    @Html.LabelFor(model => model.como_se_entero)
+                </div>
+
+                <div class="col-6 mar-bot-30">
+                    @Html.EnumDropDownListFor(model => model.como_se_entero, htmlAttributes: new { @class = "form-control search mar-0" })
+                    @Html.ValidationMessageFor(model => model.como_se_entero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        @using (Html.BeginForm("CreateProspects", "Prospectos", FormMethod.Post, new { @id = "form-prospectos" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h5 class="sub-title mar-bot-15"><u>Recomiende a Personal Training:</u></h5>
+
+            <div class="row negative">
+                <div class="col-6 mar-bot-15">
+                    <input type="text" name="p1_nombres" class="form-control search mar-0" placeholder="Nombres" />
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    <input type="text" name="p1_email" class="form-control search mar-0" placeholder="E-mail" />
+                </div>
+
+                <div class="col-6 mar-bot-25">
+                    <input type="text" name="p1_apellidos" class="form-control search mar-0" placeholder="Apellidos" />
+                </div>
+
+                <div class="col-6 mar-bot-25">
+                    <input type="text" name="p1_celular" class="form-control search mar-0" placeholder="Celular" />
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    <input type="text" name="p2_nombres" class="form-control search mar-0" placeholder="Nombres" />
+                </div>
+
+                <div class="col-6 mar-bot-15">
+                    <input type="text" name="p2_email" class="form-control search mar-0" placeholder="E-mail" />
+                </div>
+
+                <div class="col-6 mar-bot-30">
+                    <input type="text" name="p2_apellidos" class="form-control search mar-0" placeholder="Apellidos" />
+                </div>
+
+                <div class="col-6 mar-bot-30">
+                    <input type="text" name="p2_celular" class="form-control search mar-0" placeholder="Celular" />
+                </div>
+            </div>
+        }
+
+        <div class="text-center">
+            <button id="create-cliente" type="button" class="btn btn-default">Registrar Cliente</button>
+        </div>
+    </div>
+</div>

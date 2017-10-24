@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <h2 class="title"><span>Mis Citas de día</span></h2>
+
+                <table class="table mar-bot-5">
+                    <tbody>
+                        <tr>
+                            <td width="50%">Andres Carmona</td>
+                            <td width="20%">CI</td>
+                            <td width="30%" class="text-right">3:00 p.m.</td>
+                        </tr>
+                        <tr>
+                            <td>Alonso Ruiz</td>
+                            <td>CFI</td>
+                            <td class="text-right">3:30 p.m.</td>
+                        </tr>
+                        <tr>
+                            <td>Gabriela Agüero</td>
+                            <td>CI</td>
+                            <td class="text-right">3:45 p.m.</td>
+                        </tr>
+                        <tr>
+                            <td>Alexis Delgado</td>
+                            <td>CFI</td>
+                            <td class="text-right">4:00 p.m.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="see-complete">
+                    <a href="#" class="tooltip" title="Ver completo">
+                        <img src="@Url.Content("~/Images/icon-see-complete.png")" alt="Ver completo">
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="title"><span>Buscar Cliente</span></h2>
+                <form action="search-results.html" method="get">
+                    <input type="text" class="form-control search" placeholder="Codigo, Nombre, Apellido o DNI" required="required">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-default">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 flex-vertical">
+            <div class="card">
+                <h2 class="title"><span>Seguimientos Programados del Día</span></h2>
+
+                <table class="table table-light mar-bot-5">
+                    <thead>
+                        <tr>
+                            <th width="15%">Cod.</th>
+                            <th width="30%">Nombre</th>
+                            <th width="15%">Peso</th>
+                            <th width="30%">Programa</th>
+                            <th width="10%">Sem.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">20804</td>
+                            <td>Peter Torres</td>
+                            <td>84.1</td>
+                            <td>Pesos y medidas</td>
+                            <td class="text-center">1</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">34658</td>
+                            <td>Victoria Hicks</td>
+                            <td>84.1</td>
+                            <td>Pesos y medidas</td>
+                            <td class="text-center">1</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">28841</td>
+                            <td>Gregory White</td>
+                            <td>84.1</td>
+                            <td>Pesos y medidas</td>
+                            <td class="text-center">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="see-complete">
+                    <a href="#" class="tooltip" title="Ver completo">
+                        <img src="@Url.Content("~/Images/icon-see-complete.png")" alt="Ver completo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

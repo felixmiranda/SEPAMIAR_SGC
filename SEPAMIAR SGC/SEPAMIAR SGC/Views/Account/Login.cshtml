@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Login";
+}
+
+@model SEPAMIAR_SGC.ViewModel.UsuariosViewModel
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div>
+        @Html.EditorFor(model => model.usuario.email, new { htmlAttributes = new { @type = "email", @class = "form-control", @placeholder = "E-mail" } })
+        @Html.EditorFor(model => model.usuario.password, new { htmlAttributes = new { @type = "password", @class = "form-control mar-bot-0", @placeholder = "Contraseña" } })
+
+        <div class="msg-error mar-top-15">
+            @ViewBag.MessageLogin
+        </div>
+    </div>
+
+    <input type="image" src="@Url.Content("~/Images/send.png")">
+}

@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+	<title>Personal Training - @ViewBag.Title</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/main.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/main.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.min.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.structure.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.structure.min.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.theme.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/jquery-ui.theme.min.css")" rel="stylesheet" />
+</head>
+<body>
+	<div id="page-content" class="home">
+		<div class="bg" style="background-image:url('@ViewBag.BackgroundPath');"></div>
+		<header>
+			<div class="container">
+				<a href="@Url.Action(actionName: "Home",controllerName: "Account")">
+					<img src="@Url.Content("~/Images/logo-header.png")" width="216" id="logo" alt="Personal Training">
+				</a>
+				<div id="user-options">
+					@if (!string.IsNullOrEmpty(Session["ImgBase64"] as string))
+					{
+						<img src="data:image/png;base64,@SEPAMIAR_SGC.Seguridad.SessionPersister.ImgBase64" width="60" class="img-circle" alt="Foto">
+					}
+					else
+					{
+						<img src="@Url.Content("~/Images/user-default-photo.png")" alt="User" width="60" class="img-circle" />
+					}
+
+					<div class="user-data">
+						<div class="user-name">@SEPAMIAR_SGC.Seguridad.SessionPersister.NombreCliente</div>
+						<div class="user-area">@SEPAMIAR_SGC.Seguridad.SessionPersister.AreaCliente</div>
+					</div>
+
+					<div class="user-notifications">
+						<img src="@Url.Content("~/Images/icon-notifications.png")" alt="Notifications" width="41">
+                        
+                        <div class="notifications">
+                            <div class="inside">
+                                <div class="title text-left"><u>Bandeja de Aprobaciones</u></div>
+
+                                <div class="notifications-container">
+                                </div>
+                            </div>
+                        </div>
+					</div>
+
+
+					<a href="@Url.Action("LogOut","Account")">
+						<img src="@Url.Content("~/Images/icon-log-out.png")" alt="Logout" width="41">
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<section id="body">
+			@RenderBody()
+		</section>
+	</div>
+
+	@RenderSection("modal", required: false)
+
+	<script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-ui-min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-nicescroll.js")"></script>
+	<script src="@Url.Content("~/Scripts/main.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.json.js")"></script>
+	<script src="@Url.Content("~/Scripts/spin.js")"></script>
+	@RenderSection("scripts", required: false)
+</body>
+</html>

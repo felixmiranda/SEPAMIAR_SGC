@@ -1,0 +1,51 @@
+﻿@model SEPAMIAR_SGC.Models.clientes_congelamientos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>clientes_congelamientos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.clientes.codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientes.codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_desde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_desde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_hasta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_hasta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dias_congelados)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dias_congelados)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39B7C72D-DE68-452A-ADA2-E333060734D4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SEPAMIAR_SGC</RootNamespace>
+    <AssemblyName>SEPAMIAR SGC</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CryptoFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Nameless Crypto\CryptoFramework\bin\Release\CryptoFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CajeroController.cs" />
+    <Compile Include="Controllers\CampanaMarketingController.cs" />
+    <Compile Include="Controllers\CardioInfoController.cs" />
+    <Compile Include="Controllers\CardiologiaController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
+    <Compile Include="Controllers\ClientesCongelamientosController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ClientesDietasController.cs" />
+    <Compile Include="Controllers\ClientesNotasController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\CongelamientoSemanasController.cs" />
+    <Compile Include="Controllers\CorreosController.cs" />
+    <Compile Include="Controllers\EntrenadorController.cs" />
+    <Compile Include="Controllers\FichasMedicasController.cs" />
+    <Compile Include="Controllers\HorariosController.cs" />
+    <Compile Include="Controllers\LaboratorioResultadosController.cs" />
+    <Compile Include="Controllers\MarketingController.cs" />
+    <Compile Include="Controllers\NutricionController.cs" />
+    <Compile Include="Controllers\NutricionistasController.cs" />
+    <Compile Include="Controllers\PermisosController.cs" />
+    <Compile Include="Controllers\PesosMedidasController.cs" />
+    <Compile Include="Controllers\ProgramaClientesController.cs" />
+    <Compile Include="Controllers\ProspectosController.cs" />
+    <Compile Include="Controllers\PYMController.cs" />
+    <Compile Include="Controllers\SalasController.cs" />
+    <Compile Include="Controllers\SemanasPreciosController.cs" />
+    <Compile Include="Controllers\SolicitudPermisosController.cs" />
+    <Compile Include="Controllers\UsuarioPermisosController.cs" />
+    <Compile Include="Controllers\VendedoresController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
+    <Compile Include="Controllers\VentaUsuariosController.cs" />
+    <Compile Include="Migrations\201608210449065_CampoDeTipoDeDatoEnRegimenAlimentación.cs" />
+    <Compile Include="Migrations\201608210449065_CampoDeTipoDeDatoEnRegimenAlimentación.Designer.cs">
+      <DependentUpon>201608210449065_CampoDeTipoDeDatoEnRegimenAlimentación.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608272117460_estructura.cs" />
+    <Compile Include="Migrations\201608272117460_estructura.Designer.cs">
+      <DependentUpon>201608272117460_estructura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608272140321_estructura_tablas.cs" />
+    <Compile Include="Migrations\201608272140321_estructura_tablas.Designer.cs">
+      <DependentUpon>201608272140321_estructura_tablas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608272329116_usuario_foto_null.cs" />
+    <Compile Include="Migrations\201608272329116_usuario_foto_null.Designer.cs">
+      <DependentUpon>201608272329116_usuario_foto_null.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280102516_fotoUser.cs" />
+    <Compile Include="Migrations\201608280102516_fotoUser.Designer.cs">
+      <DependentUpon>201608280102516_fotoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280317007_cliente_without_usuario.cs" />
+    <Compile Include="Migrations\201608280317007_cliente_without_usuario.Designer.cs">
+      <DependentUpon>201608280317007_cliente_without_usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280516129_alter_clientes.cs" />
+    <Compile Include="Migrations\201608280516129_alter_clientes.Designer.cs">
+      <DependentUpon>201608280516129_alter_clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280600126_p.cs" />
+    <Compile Include="Migrations\201608280600126_p.Designer.cs">
+      <DependentUpon>201608280600126_p.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280639064_clientes_id.cs" />
+    <Compile Include="Migrations\201608280639064_clientes_id.Designer.cs">
+      <DependentUpon>201608280639064_clientes_id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608280644248_clientes_id_2.cs" />
+    <Compile Include="Migrations\201608280644248_clientes_id_2.Designer.cs">
+      <DependentUpon>201608280644248_clientes_id_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608282132119_modificacion_databse_ventas.cs" />
+    <Compile Include="Migrations\201608282132119_modificacion_databse_ventas.Designer.cs">
+      <DependentUpon>201608282132119_modificacion_databse_ventas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290147443_modifyProspect.cs" />
+    <Compile Include="Migrations\201608290147443_modifyProspect.Designer.cs">
+      <DependentUpon>201608290147443_modifyProspect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290423176_addUserKey.cs" />
+    <Compile Include="Migrations\201608290423176_addUserKey.Designer.cs">
+      <DependentUpon>201608290423176_addUserKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290507134_removePriceForProgram.cs" />
+    <Compile Include="Migrations\201608290507134_removePriceForProgram.Designer.cs">
+      <DependentUpon>201608290507134_removePriceForProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290509129_removeFreezingForProgram.cs" />
+    <Compile Include="Migrations\201608290509129_removeFreezingForProgram.Designer.cs">
+      <DependentUpon>201608290509129_removeFreezingForProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290648328_AddFreezingWeeksTable.cs" />
+    <Compile Include="Migrations\201608290648328_AddFreezingWeeksTable.Designer.cs">
+      <DependentUpon>201608290648328_AddFreezingWeeksTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608310236031_cambio_de_nombre_injutificado.cs" />
+    <Compile Include="Migrations\201608310236031_cambio_de_nombre_injutificado.Designer.cs">
+      <DependentUpon>201608310236031_cambio_de_nombre_injutificado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608311759553_checkFotoClientes.cs" />
+    <Compile Include="Migrations\201608311759553_checkFotoClientes.Designer.cs">
+      <DependentUpon>201608311759553_checkFotoClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608312243290_UserPhotoToBase64String.cs" />
+    <Compile Include="Migrations\201608312243290_UserPhotoToBase64String.Designer.cs">
+      <DependentUpon>201608312243290_UserPhotoToBase64String.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011751126_ChangePhotoTypeClientTable.cs" />
+    <Compile Include="Migrations\201609011751126_ChangePhotoTypeClientTable.Designer.cs">
+      <DependentUpon>201609011751126_ChangePhotoTypeClientTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609021951380_AddCustomCodeToPermisosTable.cs" />
+    <Compile Include="Migrations\201609021951380_AddCustomCodeToPermisosTable.Designer.cs">
+      <DependentUpon>201609021951380_AddCustomCodeToPermisosTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050325248_ClientsTablePhotoColumn.cs" />
+    <Compile Include="Migrations\201609050325248_ClientsTablePhotoColumn.Designer.cs">
+      <DependentUpon>201609050325248_ClientsTablePhotoColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609051534256_AddTableClientesNotas.cs" />
+    <Compile Include="Migrations\201609051534256_AddTableClientesNotas.Designer.cs">
+      <DependentUpon>201609051534256_AddTableClientesNotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609060212564_addTables.cs" />
+    <Compile Include="Migrations\201609060212564_addTables.Designer.cs">
+      <DependentUpon>201609060212564_addTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609060544589_addDiscountToCampa.cs" />
+    <Compile Include="Migrations\201609060544589_addDiscountToCampa.Designer.cs">
+      <DependentUpon>201609060544589_addDiscountToCampa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609060634527_dropIndexOnDocNumberSales.cs" />
+    <Compile Include="Migrations\201609060634527_dropIndexOnDocNumberSales.Designer.cs">
+      <DependentUpon>201609060634527_dropIndexOnDocNumberSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609101806201_AddPyMtbl.cs" />
+    <Compile Include="Migrations\201609101806201_AddPyMtbl.Designer.cs">
+      <DependentUpon>201609101806201_AddPyMtbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609102014566_modsAACC_100916.cs" />
+    <Compile Include="Migrations\201609102014566_modsAACC_100916.Designer.cs">
+      <DependentUpon>201609102014566_modsAACC_100916.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609102132215_modsAACC_100916_2.cs" />
+    <Compile Include="Migrations\201609102132215_modsAACC_100916_2.Designer.cs">
+      <DependentUpon>201609102132215_modsAACC_100916_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609102155339_clientes_notas_fechas.cs" />
+    <Compile Include="Migrations\201609102155339_clientes_notas_fechas.Designer.cs">
+      <DependentUpon>201609102155339_clientes_notas_fechas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609102251542_AACC_100916_1749.cs" />
+    <Compile Include="Migrations\201609102251542_AACC_100916_1749.Designer.cs">
+      <DependentUpon>201609102251542_AACC_100916_1749.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609180256491_ProgramsTableAppFields.cs" />
+    <Compile Include="Migrations\201609180256491_ProgramsTableAppFields.Designer.cs">
+      <DependentUpon>201609180256491_ProgramsTableAppFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609180405258_PesosMedidasTableAlterFields.cs" />
+    <Compile Include="Migrations\201609180405258_PesosMedidasTableAlterFields.Designer.cs">
+      <DependentUpon>201609180405258_PesosMedidasTableAlterFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609180441469_PesosMedidasTableAlterFields_nullable.cs" />
+    <Compile Include="Migrations\201609180441469_PesosMedidasTableAlterFields_nullable.Designer.cs">
+      <DependentUpon>201609180441469_PesosMedidasTableAlterFields_nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609180445251_PesosMedidasTableAlterFields_nullable_0.cs" />
+    <Compile Include="Migrations\201609180445251_PesosMedidasTableAlterFields_nullable_0.Designer.cs">
+      <DependentUpon>201609180445251_PesosMedidasTableAlterFields_nullable_0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609180557222_PesosMedidasTableAlterFields_defaults.cs" />
+    <Compile Include="Migrations\201609180557222_PesosMedidasTableAlterFields_defaults.Designer.cs">
+      <DependentUpon>201609180557222_PesosMedidasTableAlterFields_defaults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609291702202_AlterTableCliente_Congelamientos.cs" />
+    <Compile Include="Migrations\201609291702202_AlterTableCliente_Congelamientos.Designer.cs">
+      <DependentUpon>201609291702202_AlterTableCliente_Congelamientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609291840437_AddTableClientes_Dietas.cs" />
+    <Compile Include="Migrations\201609291840437_AddTableClientes_Dietas.Designer.cs">
+      <DependentUpon>201609291840437_AddTableClientes_Dietas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609291852133_AlterTableClientes_Dietas.cs" />
+    <Compile Include="Migrations\201609291852133_AlterTableClientes_Dietas.Designer.cs">
+      <DependentUpon>201609291852133_AlterTableClientes_Dietas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610031754149_AlterCitasTableAlterCitaTypeColumn.cs" />
+    <Compile Include="Migrations\201610031754149_AlterCitasTableAlterCitaTypeColumn.Designer.cs">
+      <DependentUpon>201610031754149_AlterCitasTableAlterCitaTypeColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610032149005_AlterCitasTableAddMotivoColumn.cs" />
+    <Compile Include="Migrations\201610032149005_AlterCitasTableAddMotivoColumn.Designer.cs">
+      <DependentUpon>201610032149005_AlterCitasTableAddMotivoColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610032158576_AlterNutAndVendTableAddActivoColumn.cs" />
+    <Compile Include="Migrations\201610032158576_AlterNutAndVendTableAddActivoColumn.Designer.cs">
+      <DependentUpon>201610032158576_AlterNutAndVendTableAddActivoColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610032221060_AlterFMTableAddUserColumns.cs" />
+    <Compile Include="Migrations\201610032221060_AlterFMTableAddUserColumns.Designer.cs">
+      <DependentUpon>201610032221060_AlterFMTableAddUserColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610040058502_AlterFMTableAlterContexturesColumn.cs" />
+    <Compile Include="Migrations\201610040058502_AlterFMTableAlterContexturesColumn.Designer.cs">
+      <DependentUpon>201610040058502_AlterFMTableAlterContexturesColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610040204130_AddParameters.cs" />
+    <Compile Include="Migrations\201610040204130_AddParameters.Designer.cs">
+      <DependentUpon>201610040204130_AddParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610050340057_AlterFichasMedicasTable.cs" />
+    <Compile Include="Migrations\201610050340057_AlterFichasMedicasTable.Designer.cs">
+      <DependentUpon>201610050340057_AlterFichasMedicasTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610060758435_AlterUserTableAlterType.cs" />
+    <Compile Include="Migrations\201610060758435_AlterUserTableAlterType.Designer.cs">
+      <DependentUpon>201610060758435_AlterUserTableAlterType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610070620576_AddCorreosTable.cs" />
+    <Compile Include="Migrations\201610070620576_AddCorreosTable.Designer.cs">
+      <DependentUpon>201610070620576_AddCorreosTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610072001430_AddCorreosReglasTable.cs" />
+    <Compile Include="Migrations\201610072001430_AddCorreosReglasTable.Designer.cs">
+      <DependentUpon>201610072001430_AddCorreosReglasTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610072009312_AlterCorreosReglasTable.cs" />
+    <Compile Include="Migrations\201610072009312_AlterCorreosReglasTable.Designer.cs">
+      <DependentUpon>201610072009312_AlterCorreosReglasTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610072203473_AlterCorreosReglasTable_1.cs" />
+    <Compile Include="Migrations\201610072203473_AlterCorreosReglasTable_1.Designer.cs">
+      <DependentUpon>201610072203473_AlterCorreosReglasTable_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610091819397_AlterCorreosReglasTable_2.cs" />
+    <Compile Include="Migrations\201610091819397_AlterCorreosReglasTable_2.Designer.cs">
+      <DependentUpon>201610091819397_AlterCorreosReglasTable_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610091905164_AlterCorreosTableAddFotoAvance.cs" />
+    <Compile Include="Migrations\201610091905164_AlterCorreosTableAddFotoAvance.Designer.cs">
+      <DependentUpon>201610091905164_AlterCorreosTableAddFotoAvance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610092239186_AlterProgramasTable.cs" />
+    <Compile Include="Migrations\201610092239186_AlterProgramasTable.Designer.cs">
+      <DependentUpon>201610092239186_AlterProgramasTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610100058024_AlterTableDietas.cs" />
+    <Compile Include="Migrations\201610100058024_AlterTableDietas.Designer.cs">
+      <DependentUpon>201610100058024_AlterTableDietas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610100139480_AlterTableDietas_1.cs" />
+    <Compile Include="Migrations\201610100139480_AlterTableDietas_1.Designer.cs">
+      <DependentUpon>201610100139480_AlterTableDietas_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610100629451_alterDietsTable.cs" />
+    <Compile Include="Migrations\201610100629451_alterDietsTable.Designer.cs">
+      <DependentUpon>201610100629451_alterDietsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610151417205_AddLocalesFieldToUserTable.cs" />
+    <Compile Include="Migrations\201610151417205_AddLocalesFieldToUserTable.Designer.cs">
+      <DependentUpon>201610151417205_AddLocalesFieldToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\campana_marketing.cs" />
+    <Compile Include="Models\clientes_asistencia.cs" />
+    <Compile Include="Models\clientes_congelamientos.cs" />
+    <Compile Include="Models\clientes_dietas.cs" />
+    <Compile Include="Models\clientes_notas.cs" />
+    <Compile Include="Models\congelamiento_semanas.cs" />
+    <Compile Include="Models\correos.cs" />
+    <Compile Include="Models\correos_reglas.cs" />
+    <Compile Include="Models\horarios.cs" />
+    <Compile Include="Models\locales.cs" />
+    <Compile Include="Controllers\LocalesController.cs" />
+    <Compile Include="Models\pesos_medidas.cs" />
+    <Compile Include="Models\programa_clientes.cs" />
+    <Compile Include="Models\prospectos.cs" />
+    <Compile Include="Models\salas.cs" />
+    <Compile Include="Models\semanas_precios.cs" />
+    <Compile Include="Models\solicitud_permisos.cs" />
+    <Compile Include="Models\venta_usuarios.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\Auth.cs" />
+    <Compile Include="Seguridad\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProgramasController.cs" />
+    <Compile Include="Controllers\SistemasController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120213136_Initial.cs" />
+    <Compile Include="Migrations\201608120213136_Initial.Designer.cs">
+      <DependentUpon>201608120213136_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\citas.cs" />
+    <Compile Include="Models\clientes.cs" />
+    <Compile Include="Models\fichas_medicas.cs" />
+    <Compile Include="Models\nutricionistas.cs" />
+    <Compile Include="Models\permisos.cs" />
+    <Compile Include="Models\programas.cs" />
+    <Compile Include="Models\usuarios.cs" />
+    <Compile Include="Models\usuario_permisos.cs" />
+    <Compile Include="Models\vendedores.cs" />
+    <Compile Include="Models\SGCModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Seguridad\CustomPrincipal .cs" />
+    <Compile Include="Seguridad\SessionPersister.cs" />
+    <Compile Include="Utilities\BackgroundJobs.cs" />
+    <Compile Include="Utilities\CurrentDate.cs" />
+    <Compile Include="Utilities\FreezingData.cs" />
+    <Compile Include="Utilities\Mail.cs" />
+    <Compile Include="Utilities\Mobile.cs" />
+    <Compile Include="Utilities\Nota.cs" />
+    <Compile Include="Utilities\PostData.cs" />
+    <Compile Include="Utilities\ProspectsReferredByClient.cs" />
+    <Compile Include="ViewModel\ClientesGeneralViewModel.cs" />
+    <Compile Include="ViewModel\UsuariosViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Audio\notification.mp3" />
+    <Content Include="Content\fonts.css" />
+    <Content Include="Content\grid.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\margins.css" />
+    <Content Include="Content\paddings.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\sf-ui-display-light-webfont.svg" />
+    <Content Include="fonts\sf-ui-display-regular-demo.html" />
+    <Content Include="fonts\sf-ui-display-regular-webfont.svg" />
+    <Content Include="fonts\sf-ui-display-ultralight-demo.html" />
+    <Content Include="fonts\sf-ui-display-ultralight-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\bg-home.jpg" />
+    <Content Include="Images\calendar.png" />
+    <Content Include="Images\clients.png" />
+    <Content Include="Images\config.png" />
+    <Content Include="Images\freezing.png" />
+    <Content Include="Images\icon-add.png" />
+    <Content Include="Images\icon-calendar.png" />
+    <Content Include="Images\icon-cardio.png" />
+    <Content Include="Images\icon-contextures.png" />
+    <Content Include="Images\icon-edit.png" />
+    <Content Include="Images\icon-freezing.png" />
+    <Content Include="Images\icon-labs.png" />
+    <Content Include="Images\icon-log-out.png" />
+    <Content Include="Images\icon-mail.png" />
+    <Content Include="Images\icon-medicine.png" />
+    <Content Include="Images\icon-notes.png" />
+    <Content Include="Images\icon-notifications.png" />
+    <Content Include="Images\icon-nut.png" />
+    <Content Include="Images\icon-reports.png" />
+    <Content Include="Images\icon-see-complete.png" />
+    <Content Include="Images\local.png" />
+    <Content Include="Images\lock.png" />
+    <Content Include="Images\logo-header.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\programs.png" />
+    <Content Include="Images\prospects.png" />
+    <Content Include="Images\rounded-corner-horizontal.png" />
+    <Content Include="Images\rounded-corner.png" />
+    <Content Include="Images\salas.png" />
+    <Content Include="Images\sales.png" />
+    <Content Include="Images\send-note.png" />
+    <Content Include="Images\send.png" />
+    <Content Include="Images\unlock.png" />
+    <Content Include="Images\user-default-photo.png" />
+    <Content Include="Images\user-picture-circule.jpg" />
+    <Content Include="Images\user-picture.jpg" />
+    <Content Include="Images\users.png" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-nicescroll.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.json.js" />
+    <Content Include="Scripts\JSDietas.js" />
+    <Content Include="Scripts\JSFichasMedicas.js" />
+    <Content Include="Scripts\JsonToHtmlTable.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\" />
+    <Folder Include="Providers\" />
+    <Folder Include="Results\" />
+    <Folder Include="Views\CampanaMarketing\" />
+    <Folder Include="Views\ClientesNotas\" />
+    <Folder Include="Views\SemanasPrecios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="fonts\sf-ui-display-light-webfont.eot" />
+    <Content Include="fonts\sf-ui-display-light-webfont.ttf" />
+    <Content Include="fonts\sf-ui-display-light-webfont.woff" />
+    <Content Include="fonts\sf-ui-display-light-webfont.woff2" />
+    <Content Include="fonts\sf-ui-display-regular-webfont.eot" />
+    <Content Include="fonts\sf-ui-display-regular-webfont.ttf" />
+    <Content Include="fonts\sf-ui-display-regular-webfont.woff" />
+    <Content Include="fonts\sf-ui-display-regular-webfont.woff2" />
+    <Content Include="fonts\sf-ui-display-ultralight-webfont.eot" />
+    <Content Include="fonts\sf-ui-display-ultralight-webfont.ttf" />
+    <Content Include="fonts\sf-ui-display-ultralight-webfont.woff" />
+    <Content Include="fonts\sf-ui-display-ultralight-webfont.woff2" />
+    <Content Include="Models\dgDietas.cd" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\usuarios\Create.cshtml" />
+    <Content Include="Views\usuarios\Delete.cshtml" />
+    <Content Include="Views\usuarios\Details.cshtml" />
+    <Content Include="Views\usuarios\Edit.cshtml" />
+    <Content Include="Views\usuarios\Index.cshtml" />
+    <Content Include="Views\Sistemas\Index.cshtml" />
+    <Content Include="Views\Programas\Create.cshtml" />
+    <Content Include="Views\Programas\Delete.cshtml" />
+    <Content Include="Views\Programas\Details.cshtml" />
+    <Content Include="Views\Programas\Edit.cshtml" />
+    <Content Include="Views\Programas\Index.cshtml" />
+    <Content Include="Views\Config\Index.cshtml" />
+    <Content Include="Views\Account\Unauthorize.cshtml" />
+    <Content Include="Views\Clientes\Create.cshtml" />
+    <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Clientes\Details.cshtml" />
+    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Prospectos\Create.cshtml" />
+    <Content Include="Views\Prospectos\Delete.cshtml" />
+    <Content Include="Views\Prospectos\Details.cshtml" />
+    <Content Include="Views\Prospectos\Edit.cshtml" />
+    <Content Include="Views\Prospectos\Index.cshtml" />
+    <Content Include="Views\ProgramaClientes\Create.cshtml" />
+    <Content Include="Views\ProgramaClientes\Delete.cshtml" />
+    <Content Include="Views\ProgramaClientes\Details.cshtml" />
+    <Content Include="Views\ProgramaClientes\Edit.cshtml" />
+    <Content Include="Views\ProgramaClientes\Index.cshtml" />
+    <Content Include="Views\VentaUsuarios\Create.cshtml" />
+    <Content Include="Views\VentaUsuarios\Delete.cshtml" />
+    <Content Include="Views\VentaUsuarios\Details.cshtml" />
+    <Content Include="Views\VentaUsuarios\Edit.cshtml" />
+    <Content Include="Views\VentaUsuarios\Index.cshtml" />
+    <Content Include="Views\Horarios\Create.cshtml" />
+    <Content Include="Views\Horarios\Delete.cshtml" />
+    <Content Include="Views\Horarios\Details.cshtml" />
+    <Content Include="Views\Horarios\Edit.cshtml" />
+    <Content Include="Views\Horarios\Index.cshtml" />
+    <Content Include="Views\Salas\Create.cshtml" />
+    <Content Include="Views\Salas\Delete.cshtml" />
+    <Content Include="Views\Salas\Details.cshtml" />
+    <Content Include="Views\Salas\Edit.cshtml" />
+    <Content Include="Views\Salas\Index.cshtml" />
+    <Content Include="Views\Locales\Create.cshtml" />
+    <Content Include="Views\Locales\Delete.cshtml" />
+    <Content Include="Views\Locales\Details.cshtml" />
+    <Content Include="Views\Locales\Edit.cshtml" />
+    <Content Include="Views\Locales\Index.cshtml" />
+    <Content Include="Views\SolicitudPermisos\Index.cshtml" />
+    <Content Include="Views\Nutricion\Index.cshtml" />
+    <Content Include="Views\Ventas\Index.cshtml" />
+    <Content Include="Views\UsuarioPermisos\Create.cshtml" />
+    <Content Include="Views\UsuarioPermisos\Delete.cshtml" />
+    <Content Include="Views\UsuarioPermisos\Details.cshtml" />
+    <Content Include="Views\UsuarioPermisos\Edit.cshtml" />
+    <Content Include="Views\UsuarioPermisos\Index.cshtml" />
+    <Content Include="Properties\webjobs-list.json" />
+    <Content Include="Views\Permisos\Create.cshtml" />
+    <Content Include="Views\Permisos\Delete.cshtml" />
+    <Content Include="Views\Permisos\Details.cshtml" />
+    <Content Include="Views\Permisos\Edit.cshtml" />
+    <Content Include="Views\Permisos\Index.cshtml" />
+    <Content Include="Views\Clientes\Global.cshtml" />
+    <Content Include="Views\CongelamientoSemanas\Create.cshtml" />
+    <Content Include="Views\CongelamientoSemanas\Delete.cshtml" />
+    <Content Include="Views\CongelamientoSemanas\Details.cshtml" />
+    <Content Include="Views\CongelamientoSemanas\Edit.cshtml" />
+    <Content Include="Views\CongelamientoSemanas\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\sepamiar-dev - Web Deploy.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Nutricionistas\Create.cshtml" />
+    <Content Include="Views\Nutricionistas\Delete.cshtml" />
+    <Content Include="Views\Nutricionistas\Details.cshtml" />
+    <Content Include="Views\Nutricionistas\Edit.cshtml" />
+    <Content Include="Views\Nutricionistas\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\PesosMedidas\Index.cshtml" />
+    <Content Include="Views\ClientesCongelamientos\Create.cshtml" />
+    <Content Include="Views\ClientesCongelamientos\Delete.cshtml" />
+    <Content Include="Views\ClientesCongelamientos\Details.cshtml" />
+    <Content Include="Views\ClientesCongelamientos\Edit.cshtml" />
+    <Content Include="Views\ClientesCongelamientos\Index.cshtml" />
+    <Content Include="Views\Clientes\AssignNutritionist.cshtml" />
+    <Content Include="Views\Citas\Reschedule.cshtml" />
+    <Content Include="Views\FichasMedicas\Index.cshtml" />
+    <Content Include="Views\FichasMedicas\Create.cshtml" />
+    <Content Include="Views\FichasMedicas\Edit.cshtml" />
+    <Content Include="Views\LaboratorioResultados\Index.cshtml" />
+    <Content Include="Views\PYM\Index.cshtml" />
+    <Content Include="Views\LaboratorioResultados\Create.cshtml" />
+    <Content Include="Views\LaboratorioResultados\Edit.cshtml" />
+    <Content Include="Views\CardioInfo\Index.cshtml" />
+    <Content Include="Views\CardioInfo\Create.cshtml" />
+    <Content Include="Views\CardioInfo\Edit.cshtml" />
+    <Content Include="Views\Cardiologia\Index.cshtml" />
+    <Content Include="Views\Cajero\Index.cshtml" />
+    <Content Include="Views\Vendedores\Index.cshtml" />
+    <Content Include="Views\Vendedores\Create.cshtml" />
+    <Content Include="Views\Vendedores\Edit.cshtml" />
+    <Content Include="Views\Vendedores\Delete.cshtml" />
+    <Content Include="Views\PesosMedidas\Create.cshtml" />
+    <Content Include="Views\PesosMedidas\Edit.cshtml" />
+    <Content Include="Views\Correos\Index.cshtml" />
+    <Content Include="Views\Correos\Create.cshtml" />
+    <Content Include="Views\Correos\Edit.cshtml" />
+    <Content Include="Views\Correos\Send.cshtml" />
+    <Content Include="Views\Marketing\Index.cshtml" />
+    <Content Include="Views\Programas\Customize.cshtml" />
+    <Content Include="Views\ClientesDietas\Index.cshtml" />
+    <Content Include="Views\ClientesDietas\Create.cshtml" />
+    <Content Include="Views\ClientesDietas\Edit.cshtml" />
+    <Content Include="Views\Entrenador\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608120213136_Initial.resx">
+      <DependentUpon>201608120213136_Initial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608210449065_CampoDeTipoDeDatoEnRegimenAlimentación.resx">
+      <DependentUpon>201608210449065_CampoDeTipoDeDatoEnRegimenAlimentación.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608272117460_estructura.resx">
+      <DependentUpon>201608272117460_estructura.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608272140321_estructura_tablas.resx">
+      <DependentUpon>201608272140321_estructura_tablas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608272329116_usuario_foto_null.resx">
+      <DependentUpon>201608272329116_usuario_foto_null.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280102516_fotoUser.resx">
+      <DependentUpon>201608280102516_fotoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280317007_cliente_without_usuario.resx">
+      <DependentUpon>201608280317007_cliente_without_usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280516129_alter_clientes.resx">
+      <DependentUpon>201608280516129_alter_clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280600126_p.resx">
+      <DependentUpon>201608280600126_p.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280639064_clientes_id.resx">
+      <DependentUpon>201608280639064_clientes_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608280644248_clientes_id_2.resx">
+      <DependentUpon>201608280644248_clientes_id_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608282132119_modificacion_databse_ventas.resx">
+      <DependentUpon>201608282132119_modificacion_databse_ventas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290147443_modifyProspect.resx">
+      <DependentUpon>201608290147443_modifyProspect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290423176_addUserKey.resx">
+      <DependentUpon>201608290423176_addUserKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290507134_removePriceForProgram.resx">
+      <DependentUpon>201608290507134_removePriceForProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290509129_removeFreezingForProgram.resx">
+      <DependentUpon>201608290509129_removeFreezingForProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290648328_AddFreezingWeeksTable.resx">
+      <DependentUpon>201608290648328_AddFreezingWeeksTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608310236031_cambio_de_nombre_injutificado.resx">
+      <DependentUpon>201608310236031_cambio_de_nombre_injutificado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608311759553_checkFotoClientes.resx">
+      <DependentUpon>201608311759553_checkFotoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608312243290_UserPhotoToBase64String.resx">
+      <DependentUpon>201608312243290_UserPhotoToBase64String.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011751126_ChangePhotoTypeClientTable.resx">
+      <DependentUpon>201609011751126_ChangePhotoTypeClientTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609021951380_AddCustomCodeToPermisosTable.resx">
+      <DependentUpon>201609021951380_AddCustomCodeToPermisosTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050325248_ClientsTablePhotoColumn.resx">
+      <DependentUpon>201609050325248_ClientsTablePhotoColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609051534256_AddTableClientesNotas.resx">
+      <DependentUpon>201609051534256_AddTableClientesNotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609060212564_addTables.resx">
+      <DependentUpon>201609060212564_addTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609060544589_addDiscountToCampa.resx">
+      <DependentUpon>201609060544589_addDiscountToCampa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609060634527_dropIndexOnDocNumberSales.resx">
+      <DependentUpon>201609060634527_dropIndexOnDocNumberSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609101806201_AddPyMtbl.resx">
+      <DependentUpon>201609101806201_AddPyMtbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102014566_modsAACC_100916.resx">
+      <DependentUpon>201609102014566_modsAACC_100916.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102132215_modsAACC_100916_2.resx">
+      <DependentUpon>201609102132215_modsAACC_100916_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102155339_clientes_notas_fechas.resx">
+      <DependentUpon>201609102155339_clientes_notas_fechas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102251542_AACC_100916_1749.resx">
+      <DependentUpon>201609102251542_AACC_100916_1749.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609180256491_ProgramsTableAppFields.resx">
+      <DependentUpon>201609180256491_ProgramsTableAppFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609180405258_PesosMedidasTableAlterFields.resx">
+      <DependentUpon>201609180405258_PesosMedidasTableAlterFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609180441469_PesosMedidasTableAlterFields_nullable.resx">
+      <DependentUpon>201609180441469_PesosMedidasTableAlterFields_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609180445251_PesosMedidasTableAlterFields_nullable_0.resx">
+      <DependentUpon>201609180445251_PesosMedidasTableAlterFields_nullable_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609180557222_PesosMedidasTableAlterFields_defaults.resx">
+      <DependentUpon>201609180557222_PesosMedidasTableAlterFields_defaults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609291702202_AlterTableCliente_Congelamientos.resx">
+      <DependentUpon>201609291702202_AlterTableCliente_Congelamientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609291840437_AddTableClientes_Dietas.resx">
+      <DependentUpon>201609291840437_AddTableClientes_Dietas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609291852133_AlterTableClientes_Dietas.resx">
+      <DependentUpon>201609291852133_AlterTableClientes_Dietas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610031754149_AlterCitasTableAlterCitaTypeColumn.resx">
+      <DependentUpon>201610031754149_AlterCitasTableAlterCitaTypeColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610032149005_AlterCitasTableAddMotivoColumn.resx">
+      <DependentUpon>201610032149005_AlterCitasTableAddMotivoColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610032158576_AlterNutAndVendTableAddActivoColumn.resx">
+      <DependentUpon>201610032158576_AlterNutAndVendTableAddActivoColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610032221060_AlterFMTableAddUserColumns.resx">
+      <DependentUpon>201610032221060_AlterFMTableAddUserColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610040058502_AlterFMTableAlterContexturesColumn.resx">
+      <DependentUpon>201610040058502_AlterFMTableAlterContexturesColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610040204130_AddParameters.resx">
+      <DependentUpon>201610040204130_AddParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610050340057_AlterFichasMedicasTable.resx">
+      <DependentUpon>201610050340057_AlterFichasMedicasTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610060758435_AlterUserTableAlterType.resx">
+      <DependentUpon>201610060758435_AlterUserTableAlterType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610070620576_AddCorreosTable.resx">
+      <DependentUpon>201610070620576_AddCorreosTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610072001430_AddCorreosReglasTable.resx">
+      <DependentUpon>201610072001430_AddCorreosReglasTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610072009312_AlterCorreosReglasTable.resx">
+      <DependentUpon>201610072009312_AlterCorreosReglasTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610072203473_AlterCorreosReglasTable_1.resx">
+      <DependentUpon>201610072203473_AlterCorreosReglasTable_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610091819397_AlterCorreosReglasTable_2.resx">
+      <DependentUpon>201610091819397_AlterCorreosReglasTable_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610091905164_AlterCorreosTableAddFotoAvance.resx">
+      <DependentUpon>201610091905164_AlterCorreosTableAddFotoAvance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610092239186_AlterProgramasTable.resx">
+      <DependentUpon>201610092239186_AlterProgramasTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610100058024_AlterTableDietas.resx">
+      <DependentUpon>201610100058024_AlterTableDietas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610100139480_AlterTableDietas_1.resx">
+      <DependentUpon>201610100139480_AlterTableDietas_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610100629451_alterDietsTable.resx">
+      <DependentUpon>201610100629451_alterDietsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610151417205_AddLocalesFieldToUserTable.resx">
+      <DependentUpon>201610151417205_AddLocalesFieldToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65288</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65288/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Web.WebJobs.Publish.1.0.12\tools\webjobs.targets" Condition="Exists('..\packages\Microsoft.Web.WebJobs.Publish.1.0.12\tools\webjobs.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,137 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.horarios>
+
+@{
+	ViewBag.Title = "Horarios";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "sch_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+		@Html.ActionLink("Registrar Horario", "Create", null, new { @class = "btn btn-small btn-default pull-right mar-top-10", style = ViewBag.DisplayNone })
+
+		<label class="switch pull-right mar-rig-10  mar-top-10">
+			<input type="checkbox" name="deleteds" id="show-deleted" value="1" />
+			<span class="slider round"></span>
+		</label>
+
+		<div class="text-normal pull-right mar-rig-5 mar-top-10">Ver horarios eliminados</div>
+
+		<h3 class="title mar-bot-30"><u>Horarios</u></h3>
+
+		<table class="table">
+			<tr>
+				<th class="text-left" width="20%">
+					@Html.DisplayNameFor(model => model.programa.nombre)
+				</th>
+				<th class="text-left" width="20%">
+					@Html.DisplayNameFor(model => model.sala.nombre)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.lunes)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.martes)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.miercoles)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.jueves)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.viernes)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.sabado)
+				</th>
+				<th class="text-left" width="5%">
+					@Html.DisplayNameFor(model => model.domingo)
+				</th>
+				<th class="text-left" width="15%">
+					@Html.DisplayNameFor(model => model.hora)
+				</th>
+				<th class="text-left" width="10%">
+					Acciones
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr class="@(@item.deleted_at != null ? "deleted" : "")">
+					<td>
+						@Html.DisplayFor(modelItem => item.programa.nombre)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.sala.nombre)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.lunes)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.martes)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.miercoles)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.jueves)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.viernes)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.sabado)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.domingo)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.hora)
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "sch_update":
+									<a href="@Url.Action("Edit", "Horarios", new { id = item.id })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "sch_details":
+									<a href="@Url.Action("Details", "Horarios", new { id = item.id })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								case "sch_delete":
+									if (item.deleted_at == null)
+									{
+										<a href="@Url.Action("Delete", "Horarios", new { id = item.id })">
+											<i class="fa fa-trash" aria-hidden="true"></i>
+										</a>
+									}
+									else
+									{
+										<a href="@Url.Action("Restore", "Horarios", new { id = item.id })">
+											<i class="fa fa-undo" aria-hidden="true"></i>
+										</a>
+									}
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

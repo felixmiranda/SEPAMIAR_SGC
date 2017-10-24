@@ -1,0 +1,93 @@
+﻿@model SEPAMIAR_SGC.Models.pesos_medidas
+
+@{
+	ViewBag.Title = "Editar";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="card" style="max-height: 75vh; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", new { @clientCode = ViewBag.clienteId }, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Crear Pesos y Medidas</u></h3>
+
+		@using (Html.BeginForm("Edit", "PesosMedidas", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+		{
+			@Html.AntiForgeryToken()
+
+			<div>
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				@Html.HiddenFor(m => m.id)
+				@Html.HiddenFor(m => m.created_at)
+				@Html.HiddenFor(m => m.created_by)
+				@Html.HiddenFor(m => m.updated_at)
+				@Html.HiddenFor(m => m.updated_by)
+				@Html.HiddenFor(m=>m.clienteId)
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.clientes.codigo)
+					</div>
+
+					<div class="col-3">
+						<input type="text" name="codigo" value="@Model.clientes.codigo" class="form-control search mar-0" readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.peso_1)
+					</div>
+
+					<div class="col-3">
+						@Html.EditorFor(model => model.peso_1, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.peso_2)
+					</div>
+
+					<div class="col-3">
+						@Html.EditorFor(model => model.peso_2, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.peso_3)
+					</div>
+
+					<div class="col-3">
+						@Html.EditorFor(model => model.peso_3, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.porc_grasa_corporal)
+					</div>
+
+					<div class="col-3">
+						@Html.EditorFor(model => model.porc_grasa_corporal, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						@Html.LabelFor(model => model.medidas)
+					</div>
+
+					<div class="col-3">
+						@Html.EditorFor(model => model.medidas, new { htmlAttributes = new { @class = "form-control search mar-0" } })
+					</div>
+				</div>
+
+				<div class="text-center mar-bot-15">
+					<input type="submit" value="Crear" class="btn btn-default" style="z-index:0;" />
+				</div>
+			</div>
+		}
+	</div>
+</div>

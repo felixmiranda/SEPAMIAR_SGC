@@ -1,0 +1,125 @@
+﻿@model SEPAMIAR_SGC.Models.prospectos
+
+@{
+	ViewBag.Title = "Eliminar";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="card" style="max-height: 500px; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Eliminar Prospecto</u></h3>
+
+		<h4>¿Estás seguro que quieres eliminar esto?</h4>
+		
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.nombres)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.nombres)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.apellidos)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.apellidos)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.genero)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.genero)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.fecha_nacimiento)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.fecha_nacimiento)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.documento_tipo)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.documento_tipo)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.documento_numero)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.documento_numero)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.email_personal)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.email_personal)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.centros_laboral)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.centros_laboral)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.cargo_laboral)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.cargo_laboral)
+			</div>
+		</div>
+
+		<div class="row mar-bot-15">
+			<div class="col-3">
+				@Html.DisplayNameFor(model => model.email_empresa)
+			</div>
+
+			<div class="col-6">
+				@Html.DisplayFor(model => model.email_empresa)
+			</div>
+		</div>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="text-center">
+				<input type="submit" value="Eliminar" class="btn btn-small btn-default mar-rig-10" />
+				@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-small btn-default" })
+			</div>
+		}
+	</div>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.LabResults>
+
+@{
+	ViewBag.Title = "Resultados Laboratorio";
+	Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "labs_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+
+		@Html.ActionLink("Registrar Resultados", "Create", new { @clientId = ViewBag.clientId }, new {  @class = "btn btn-default btn-small pull-right", style = ViewBag.DisplayNone })
+		@Html.Hidden("clientId", (int)ViewBag.clientId)
+
+		<h3 class="title mar-bot-30"><u>Resultados de laboratorio - @ViewBag.clientName</u></h3>
+
+		<table class="table">
+			<tr>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.fecha)
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.trigliceridos)
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.colesterol)
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.creatinina)
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.glucosa_basal)
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.hemoglobina)
+				</th>
+				<th width="10%">Acciones</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					@{
+						ViewBag.date = item.fecha.ToShortDateString();
+					}
+
+					<td>
+						<p class="mar-0">@ViewBag.date</p>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.trigliceridos)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.colesterol)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.creatinina)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.glucosa_basal)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.hemoglobina)
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "labs_update":
+									<a href="@Url.Action("Edit", "LaboratorioResultados", new { id = item.id, clientId = ViewBag.clientId })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "labs_details":
+									<a href="@Url.Action("Details", "LaboratorioResultados", new { id = item.id, clientId = ViewBag.clientId  })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

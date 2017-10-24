@@ -1,0 +1,138 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.clientes_dietas>
+
+@{
+	ViewBag.Title = "Dietas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "cldiet_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+		@Html.ActionLink("Crear Dieta", null, null, new { @data_role = "modal", @data_target = "#create-diet", @class = "btn btn-default btn-small pull-right", style = ViewBag.DisplayNone })
+
+		<h3 class="title mar-bot-30"><u>Dietas para cliente</u></h3>
+
+		@using (Html.BeginForm("GetDietsForClient", "ClientesDietas", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+			{
+			<div>
+				@Html.AntiForgeryToken()
+				<div class="row mar-bot-15">
+					<div class="col-5">
+						@Html.TextBox("value", null, htmlAttributes: new { @class = "form-control search mar-0", @placeholder = "Codigo de cliente" })
+					</div>
+					<div class="col-2">
+						<input type="submit" value="Buscar" class="btn btn-default btn-small" />
+					</div>
+				</div>
+			</div>
+			}
+
+		<table class="table">
+			<tr>
+				<th width="10%" class="text-left">
+					@Html.DisplayNameFor(model => model.programa_clientes.id)
+				</th>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.programa_clientes.programa.nombre)
+				</th>
+				<th width="30%" class="text-left">
+					@Html.DisplayNameFor(model => model.programa_clientes.cliente.nombres)
+				</th>
+				<th width="30%" class="text-left">
+					Fe. Creado
+				</th>
+				<th width="10%" class="text-left">
+					Acciones
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.programa_clientes.id)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.programa_clientes.programa.nombre)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.programa_clientes.cliente.nombres)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.programa_clientes.created_at)
+					</td>
+					<td>
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "cldiet_update":
+									<a href="@Url.Action("Edit", "ClientesDietas", new { id = item.id })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "cldiet_details":
+									<a href="@Url.Action("Global", "ClientesDietas", new { id = item.id })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>
+
+@section modal
+{
+	<div id="create-diet" class="overlay">
+		<div class="model">
+			@using (Html.BeginForm("GetNewDiet", "ClientesDietas"))
+			{
+				<h3 class="title">
+					<u>Asignar Dieta</u>
+				</h3>
+
+				<input id="prog-id" type="hidden" name="ProgId" value="" />
+
+				<input id="cl-code" type="text"  name="Value" class="form-control search mar-bot-15" placeholder="Ingrese Cliente"  required/>
+				<input id="prog-name" type="text" name="Prog" class="form-control search mar-bot-15" placeholder="Programa Activo"  required/>
+
+				<div class="text-right">
+					<button id="assign-btn" type="submit" class="btn btn-default btn-small" disabled>Asignar</button>
+					<button type="button" class="btn btn-default btn-small btn-cancel">Cancelar</button>
+				</div>
+			}
+		</div>
+	</div>
+}
+
+@section scripts
+{
+	<script>
+		$("#cl-code").change(function () {
+			var clientCode = $("#cl-code").val();
+			var getting = $.get("/Programas/GetActiveProgramForClient", { value: clientCode })
+
+			getting.done(function (data) {
+				$("#prog-name").val(data.pId);
+				$("#assign-btn").attr('disabled', false);
+			});
+
+			getting.fail(function (data) {
+				alert("Error al obtener programa activo")
+			});
+		});
+	</script>	
+}

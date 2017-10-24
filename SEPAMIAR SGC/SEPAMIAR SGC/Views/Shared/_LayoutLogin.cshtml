@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <title>Personal Training - @ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" />
+</head>
+<body>
+    <section id="login">
+        <img src="@Url.Content("~/Images/logo.png")" width="282" alt="Personal Trainer">
+
+        @RenderBody()
+    </section>
+
+	<footer style="position: fixed; bottom: 0px; right: 150px; width: 180px; height: 80px; background-color: #CE4B1E; box-shadow: 0px -2px 6px black; text-align: center; color: white; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;">
+		<h2>DEV</h2>
+	</footer>
+
+    <script src="@Url.Content("~/Scripts/jquery-2.2.0.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-nicescroll.js")"></script>
+    <script src="@Url.Content("~/Scripts/main.js")"></script>
+</body>
+</html>
+

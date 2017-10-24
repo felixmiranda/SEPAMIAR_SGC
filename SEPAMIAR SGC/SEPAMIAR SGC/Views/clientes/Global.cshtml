@@ -1,0 +1,215 @@
+﻿@model SEPAMIAR_SGC.Models.clientes
+
+@{
+	ViewBag.Title = Model.codigo;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="profile" class="container">
+	<div class="card full-height">
+		<div class="row">
+			<div class="col-auto">
+				<h1 id="profile-user-name" class="title big mar-bot-0">
+					<span>@Model.nombres @Model.apellidos</span>
+				</h1>
+				
+
+				<div class="row negative mar-top-15">
+					<div class="col-4">
+						<span class="text-light text-big">(@Model.codigo)</span>
+					</div>
+					<div class="col-2 center-vertical">
+						<a href="@Url.Action("Create","ClientesNotas")" data-role="modal" data-target="#show-client-notes">
+							<img src="~/Images/icon-notes.png" alt="Notas nivel cliente">
+						</a>
+					</div>
+					<div class="col-2">
+						<a href="javascript:void(0)" class="pull-right mar-top-10 box-globe-indicator" data-role="modal" data-target="#show-client-complete-info">
+							<img src="~/Images/icon-see-complete.png" alt="Ver completo">
+						</a>
+					</div>
+				</div>
+
+				<table class="table table-light table-big">
+					<tbody>
+						<tr>
+							<th class="text-right" width="110">Programa:</th>
+							<td colspan="3">
+								<span>@ViewBag.ProgramName</span>
+								<a href="@Url.Action("Edit","ProgramaClientes",new { id = ViewBag.ProgramId })">
+									<img src="~/Images/icon-edit.png" alt="Editar" class="box-globe-indicator" data-globe="#edit-program">
+								</a>								
+							</td>
+						</tr>
+						<tr>
+							<th class="text-right">Inicio:</th>
+							<td width="150">@ViewBag.ProgramInitDate</td>
+							<th class="text-right" width="50">Fin:</th>
+							<td>@ViewBag.ProgramEndDate</td>
+						</tr>
+						<tr>
+							<th class="text-right">Horario:</th>
+							<td colspan="3">@ViewBag.ProgramSchedule</td>
+						</tr>
+						<tr>
+							<th class="text-right">Local:</th>
+							<td colspan="3">@ViewBag.Gym</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="width: 308px;">
+				@if (Model.foto != null)
+				{
+					<img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.foto)" class="img-circle" width="278" alt="Cliente">
+				}
+				else
+				{
+					<img src="~/Images/user-default-photo.png" class="img-circle" width="278" alt="Cliente">
+				}
+			</div>
+		</div>
+
+        <div class="calendar">
+
+        </div>
+
+		<hr/>
+
+		<h2 class="title">Nutrición</h2>
+
+		<table class="table table-light table-big">
+			<tbody>
+				<tr>
+					<th class="text-left" width="25%">Nutricionista</th>
+					<td width="20%">
+						<span>@ViewBag.AssignedNutritionist</span>
+						<img src="~/Images/icon-edit.png" alt="Editar" class="box-globe-indicator" data-globe="#edit-program">
+					</td>
+					<th class="text-left" width="25%">Dieta adaptación</th>
+					<td>
+						<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="25%">Ficha de salud actual</th>
+					<td width="25%">
+						<span>@ViewBag.MedicalId</span>
+						<img src="~/Images/icon-edit.png" alt="Editar" class="box-globe-indicator" data-globe="#edit-program">
+					</td>
+					<th class="text-left" width="25%">Dieta asignada</th>
+					<td>
+						<span>@ViewBag.DietCode</span>
+						<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="15%">Cardiología</th>
+					<td width="25%">
+						<span>@ViewBag.Cardio</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<hr />
+
+		<h2 class="title">Ventas</h2>
+
+		<table class="table table-light table-big">
+			<tbody>
+				<tr>
+					<th class="text-left" width="25%">Vendedor</th>
+					<td width="20%">
+						<span>@ViewBag.Seller</span>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="25%">Boleta vigente</th>
+					<td width="20%">
+						<span>@ViewBag.LastTicket</span>
+					</td>
+					<th class="text-left" width="25%">Fecha de Inscripción</th>
+					<td>
+						<span>@ViewBag.LastRenewal</span>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="25%">Semanas Contratadas</th>
+					<td width="20%">
+						<span>@ViewBag.BoughtWeeks</span>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="25%">Semanas Utilizadas</th>
+					<td width="20%">
+						<span>@ViewBag.UsedWeeks</span>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-left" width="25%">Semanas Disponibles</th>
+					<td width="20%">
+						<span>@ViewBag.PendingWeeks</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@section modal
+{
+	<div id="show-client-notes" class="overlay">
+		<div class="model client-notes">
+                <div class="client-notes-container">
+                    @foreach (var item in @ViewBag.ClientNotes as List<SEPAMIAR_SGC.Models.clientes_notas>)
+                    {
+                    <div class="client-notes-item">
+                        <img src="@item.usuarios.getFoto()" class="img-circle pull-left" width="60" alt="" />
+                        <div class="pull-right">@item.created_at</div>
+                        <h3>@item.usuarios.nombres @item.usuarios.apellidos</h3>
+                        <p>
+                            @item.nota
+                        </p>
+                    </div>}
+                </div>
+
+			@using (Html.BeginForm("AddNota", "ClientesNotas", FormMethod.Post, new { @id = "form-note" }))
+            {
+                <input type="hidden" name="cliente_id" value="@Model.id_alt" />
+                <textarea name="nota" id="client-notes-text" class="form-control" placeholder="Escribir nota aquí..."></textarea>
+                <input type="image" src="~/Images/send-note.png" />
+			}
+		</div>
+	</div>
+
+	<div id="show-client-complete-info" class="overlay">
+		<div class="model">
+
+		</div>
+	</div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#form-note").on("submit", function (e) {
+                e.preventDefault();
+
+                var form = $(this);
+                var url = form.attr("action");
+                var data = form.serialize();
+
+                $.post(url, data, function (request) {
+                    if (request.state == "success") {
+                        $("#client-notes-text").val("");
+                        $(".client-notes-container").prepend(request.html);
+                    } else {
+                        alert(request.message);
+                    }
+                });
+            });
+        });
+    </script>
+}

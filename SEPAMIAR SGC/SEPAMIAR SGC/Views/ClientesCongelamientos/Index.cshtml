@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.clientes_congelamientos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.clientes.codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_desde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_hasta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dias_congelados)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.clientes.codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_desde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_hasta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dias_congelados)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

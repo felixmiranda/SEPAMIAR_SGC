@@ -1,0 +1,46 @@
+﻿@model SEPAMIAR_SGC.Models.clientes_dietas
+
+@{
+	ViewBag.Title = "Crear Dieta";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container diet">
+	<div class="card" style="max-height: 75vh; overflow: auto">
+		@Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-small btn-default pull-right mar-top-10" })
+
+		<h3 class="title mar-bot-30"><u>Crear Dieta de Cliente</u></h3>
+
+		<div>
+			@using (Html.BeginForm("Create", "ClientesDietas", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
+
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+				@Html.Hidden("cId", (int)ViewBag.clientId)
+				@Html.Hidden("pId", (int)ViewBag.programId)
+
+				<div class="row mar-bot-15">
+					<div class="col-3">
+						<input type="button" name="addDietOption" id="addDietOption" value="Agregar Opción" class="btn btn-default btn-small mar-0" />
+					</div>
+				</div>
+
+				<div id="diets">
+
+				</div>
+
+				<div class="text-right">
+					<input id="create-diets-btn" name="create-diets-btn" type="button" value="Crear" class="btn btn-default mar-bot-15" style="z-index:0;" disabled />
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<script src="@Url.Content("~/Scripts/JSDietas.js")"></script>
+}

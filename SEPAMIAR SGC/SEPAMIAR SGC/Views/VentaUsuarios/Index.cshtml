@@ -1,0 +1,103 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.venta_usuarios>
+
+@{
+	ViewBag.Title = "Ventas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "slsusr_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+		<h3 class="title mar-bot-30"><u>Ventas a Clientes</u></h3>
+
+		<table class="table">
+			<tr>
+				<th width="15%" class="text-left">
+					@Html.Label("Cod. Cliente")
+				</th>
+				<th width="15%" class="text-left">
+					@Html.Label("# Documento")
+				</th>
+				<th width="15%" class="text-left">
+					@Html.Label("Tipo de Pago")
+				</th>
+				<th width="15%" class="text-left">
+					@Html.DisplayNameFor(model => model.monto)
+				</th>
+				<th width="10%" class="text-left">
+					@Html.Label("Atendido")
+				</th>
+				<th width="20%" class="text-left">
+					@Html.DisplayNameFor(model => model.created_at)
+				</th>
+				<th width="10%">Acciones</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.cliente.codigo)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.numero_boleta)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.tipo_pago)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.monto)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.atendido)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.created_at)
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "slsusr_update":
+									<a href="@Url.Action("Edit", "VentaUsuarios", new { id = item.id })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "slsusr_details":
+									<a href="@Url.Action("Details", "VentaUsuarios", new { id = item.id })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								case "slsusr_delete":
+									if (item.deleted_at == null)
+									{
+										<a href="@Url.Action("Delete", "VentaUsuarios", new { id = item.id })">
+											<i class="fa fa-trash" aria-hidden="true"></i>
+										</a>
+									}
+									else
+									{
+										<a href="@Url.Action("Restore", "VentaUsuarios", new { id = item.id })">
+											<i class="fa fa-undo" aria-hidden="true"></i>
+										</a>
+									}
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+
+		</table>
+	</div>
+</div>

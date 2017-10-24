@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SEPAMIAR_SGC.Models.pesos_medidas>
+
+@{
+	ViewBag.Title = "Pesos y Medidas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.DisplayNone = "display: none;";
+	foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+	{
+		if (p.codigo_interno == "pymreg_create")
+		{
+			ViewBag.DisplayNone = "";
+		}
+	}
+}
+
+<div class="container">
+	<div class="card">
+
+		@if (ViewBag.clientName != "")
+		{
+			@Html.ActionLink("Crear Registro Semanal", "Create", new { @clientId = ViewBag.clientId }, new { @class = "btn btn-small btn-default pull-right mar-top-10", style = ViewBag.DisplayNone })
+		}
+
+		<h3 class="title mar-bot-30"><u>Pesos y Medidas - @ViewBag.clientName</u></h3>
+
+		@using (Html.BeginForm("GetRegistriesForClient", "PesosMedidas", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+			{
+			<div>
+				@Html.AntiForgeryToken()
+				<div class="row mar-bot-15">
+					<div class="col-5">
+						@Html.TextBox("value", null, htmlAttributes: new { @class = "form-control search mar-0", @placeholder = "Codigo de cliente" })
+					</div>
+					<div class="col-2">
+						<input type="submit" value="Buscar" class="btn btn-small btn-default pull-left mar-top-5" />
+					</div>
+				</div>
+			</div>
+			}
+
+		<table class="table">
+			<tr>
+				<th width="45%" class="text-left">
+					@Html.DisplayNameFor(model => model.clientes.codigo)
+				</th>
+				<th width="45%" class="text-left">
+					Fecha Creación
+				</th>
+				<th width="10%" class="text-left">
+					Acciones
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.clientes.codigo)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.created_at)
+					</td>
+					<td class="td-actions">
+						@foreach (SEPAMIAR_SGC.Models.permisos p in ViewBag.Permisos)
+						{
+							switch (p.codigo_interno)
+							{
+								case "pymreg_update":
+									<a href="@Url.Action("Edit", "PesosMedidas", new { id = item.id })">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+									</a>
+									break;
+								case "pymreg_details":
+									<a href="@Url.Action("Details", "PesosMedidas", new { id = item.id })">
+										<i class="fa fa-info" aria-hidden="true"></i>
+									</a>
+									break;
+								default:
+									break;
+							}
+						}
+					</td>
+				</tr>
+			}
+
+		</table>
+	</div>
+</div>
